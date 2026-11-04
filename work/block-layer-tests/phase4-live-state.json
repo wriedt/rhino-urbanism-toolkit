@@ -1,0 +1,35 @@
+{
+  "originals": [
+    [
+      "81af6fe0-edc5-427c-bd17-61cc2794ee31",
+      2,
+      "R0=(1,0,0,10), R1=(0,1,0,0), R2=(0,0,1,0), R3=(0,0,0,1)",
+      "{\"layer_id\": \"430ce6c7-13d8-40d9-ae38-08e0e7d0f1df\", \"layer_path\": \"Layer 02\", \"version\": 1}"
+    ],
+    [
+      "975b1114-7854-49be-b47d-35ac7d3720e6",
+      2,
+      "R0=(1,0,0,0), R1=(0,1,0,0), R2=(0,0,1,0), R3=(0,0,0,1)",
+      "{\"layer_id\": \"430ce6c7-13d8-40d9-ae38-08e0e7d0f1df\", \"layer_path\": \"Layer 02\", \"version\": 1}"
+    ]
+  ],
+  "selection": [],
+  "defs": [
+    "bd6c339a-d6f2-45df-8bcd-33ed321dd318",
+    "79b0d549-091f-4bcd-ad1d-f06fa5ea5448",
+    "825bfba8-9812-4fc4-8dbf-fc0885659116",
+    "0c48365c-e051-484d-983d-ec656007503f"
+  ],
+  "ids": [
+    "f2addeb2-1c6d-4e57-b1d6-b034614603de",
+    "dc86b41b-b31f-4067-90e0-230fe3488359",
+    "3e49bcc0-e5c0-4993-a255-c91283cd2d6a",
+    "8c2bb0fa-5717-4d3c-b8e7-a30d73d95fc8"
+  ],
+  "raws": {
+    "bd6c339a-d6f2-45df-8bcd-33ed321dd318": "{\"version\": 1, \"layer_id\": \"40b1f4dc-1230-450b-b28e-2fdbcfd4361d\", \"layer_path\": \"BL4_Review::Trees\"}",
+    "79b0d549-091f-4bcd-ad1d-f06fa5ea5448": "{\"version\": 1, \"layer_id\": \"d895a014-c7ae-4dcb-b1ba-00c76ba93c5e\", \"layer_path\": \"BL4_Review::Trees\"}",
+    "825bfba8-9812-4fc4-8dbf-fc0885659116": "{\"version\": 1, \"layer_id\": \"ae8ccf7a-1af0-4f9f-8c01-8d313d91ce34\", \"layer_path\": \"BL4_Review\"}",
+    "0c48365c-e051-484d-983d-ec656007503f": "{\"version\": 1, \"layer_id\": \"cec50e26-2f0d-44c4-b2da-8b5411c1989d\", \"layer_path\": \"BL4_Preview::Target\"}"
+  }
+}

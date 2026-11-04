@@ -1,0 +1,10 @@
+{
+  "passed": 5,
+  "checks": [
+    "AssignBlockLayer.py replaces cached cleanup helper",
+    "AssignBlockLayer.py loads the nested assignment checkbox after a stale UI import",
+    "ManageBlockLayers.py replaces cached cleanup helper",
+    "ManageBlockLayers.py loads the nested assignment checkbox after a stale UI import",
+    "CleanUpBlockLayers.py replaces cached cleanup helper"
+  ]
+}

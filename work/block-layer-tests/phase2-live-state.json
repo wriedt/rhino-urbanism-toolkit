@@ -1,0 +1,36 @@
+{
+  "originals": [
+    [
+      "81af6fe0-edc5-427c-bd17-61cc2794ee31",
+      2,
+      "R0=(1,0,0,10), R1=(0,1,0,0), R2=(0,0,1,0), R3=(0,0,0,1)",
+      "{\"layer_id\": \"430ce6c7-13d8-40d9-ae38-08e0e7d0f1df\", \"layer_path\": \"Layer 02\", \"version\": 1}"
+    ],
+    [
+      "975b1114-7854-49be-b47d-35ac7d3720e6",
+      2,
+      "R0=(1,0,0,0), R1=(0,1,0,0), R2=(0,0,1,0), R3=(0,0,0,1)",
+      "{\"layer_id\": \"430ce6c7-13d8-40d9-ae38-08e0e7d0f1df\", \"layer_path\": \"Layer 02\", \"version\": 1}"
+    ]
+  ],
+  "selection": [],
+  "source": 8,
+  "target": 9,
+  "indices": [
+    4,
+    5,
+    6
+  ],
+  "ids": [
+    "b618f3c4-6f14-4b9b-bd9a-ee2e1d34ab7b",
+    "91155ad7-88c5-4f50-896c-11eed67b6846",
+    "e7f1fd17-c35f-4f2c-860a-746f5f8a4ab6",
+    "01713e40-fcda-469c-a292-b7f91a55eb56",
+    "be743cda-7047-407a-87f9-1f2b92f50b22"
+  ],
+  "keys": [
+    "802556af-2db3-43ba-bfea-958617aa1a74",
+    "46f5c453-760f-49d5-9b6c-e16aa9a7eda0",
+    "2af5ccda-4cf0-42be-8acd-fff2c6409db3"
+  ]
+}

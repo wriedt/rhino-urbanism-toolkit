@@ -1,15 +1,15 @@
 #! python 3
 # -*- coding: utf-8 -*-
 # Author: Rune Wriedt (runewriedt@gmail.com)
-# Version: 1.0
-# Date: 2026-06-15
+# Version: 1.1
+# Date: 2026-10-23
 # Description:
 # Computes total horizontal section area of closed Breps / closed Breps inside blocks.
 # For each solid, the script:
 #   1. Finds the lowest horizontal planar face(s)
 #   2. Sums the area of those base face(s)
 #   3. Uses the base face centroid Z as the local base height
-#   4. Creates a World XY section plane at base Z + 1.5 metres
+#   4. Creates a World XY section plane above base Z (session default 1.5 metres)
 #   5. Intersects the closed Brep with that plane
 #   6. Calculates the true filled plan area from the resulting closed section curves
 #      Nested curves are treated with an even/odd rule:
@@ -24,18 +24,58 @@ import Rhino
 import rhinoscriptsyntax as rs
 import scriptcontext as sc
 from System.Drawing import Color
-from System.Windows.Forms import Clipboard
 import math
+import os
+import sys
 
 import Eto.Forms as forms
 import Eto.Drawing as drawing
 
+# ScriptEditor and published commands may not add the script folder to sys.path.
+SCRIPT_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
+if SCRIPT_DIRECTORY not in sys.path:
+    sys.path.insert(0, SCRIPT_DIRECTORY)
+import urbanism_ui as ui
+
 WARN_LAYER_NAME = "QuickArea_Warnings"
 WARN_LAYER_COLOR = Color.FromArgb(230, 50, 50)
 
-# The legal/measuring offset is 1.5 metres.
+# The default offset is 1.5 metres; the session value can be changed in the result.
 # It is converted to the current Rhino model unit system in offset_1p5m_in_model_units().
 SECTION_HEIGHT_METRES = 1.5
+HEIGHT_STICKY_KEY = 'RhinoUrbanism.QuickArea.SectionHeightMetres'
+AREA_UNITS = (('m²', 'm²', 1.0), ('km²', 'km²', 1000000.0),
+              ('Hectares (ha)', 'ha', 10000.0))
+
+
+def section_height_metres():
+    value = sc.sticky.get(HEIGHT_STICKY_KEY, SECTION_HEIGHT_METRES)
+    return value if isinstance(value, (int, float)) and math.isfinite(value) and value > 0 else SECTION_HEIGHT_METRES
+
+
+def area_in_unit(value, unit_index, model_units=None):
+    model_units = sc.doc.ModelUnitSystem if model_units is None else model_units
+    to_metres = Rhino.RhinoMath.UnitScale(model_units, Rhino.UnitSystem.Meters)
+    return value * to_metres * to_metres / AREA_UNITS[unit_index][2]
+
+
+def prompt_section_height(current):
+    getter = Rhino.Input.Custom.GetNumber()
+    try:
+        getter.SetCommandPrompt('Section height above each local base (metres)')
+        getter.SetDefaultNumber(current)
+        getter.SetLowerLimit(0.0, False)
+        getter.AcceptNothing(True)
+        result = getter.Get()
+        if result == Rhino.Input.GetResult.Nothing:
+            return current
+        if result == Rhino.Input.GetResult.Number:
+            value = getter.Number()
+            if math.isfinite(value) and value > 0:
+                return value
+        return None
+    finally:
+        getter.Dispose()
 
 
 def ensure_layer(name, color):
@@ -80,7 +120,7 @@ class WarningTagger(object):
 
 def offset_1p5m_in_model_units():
     """
-    Returns 1.5 metres converted to the active Rhino document units.
+    Returns the current session height, default 1.5 m, in document units.
 
     Examples:
       - model in metres      -> 1.5
@@ -94,11 +134,11 @@ def offset_1p5m_in_model_units():
             Rhino.UnitSystem.Meters,
             sc.doc.ModelUnitSystem
         )
-        return SECTION_HEIGHT_METRES * scale
+        return section_height_metres() * scale
     except:
         # Conservative fallback: if the conversion fails, use the raw value.
         # In a metres model this is correct.
-        return SECTION_HEIGHT_METRES
+        return section_height_metres()
 
 
 def try_face_plane(face, tol):
@@ -299,7 +339,8 @@ def true_filled_area_from_section_loops(section_loops, section_plane, tol):
     return total, len(loop_data), loop_data
 
 
-def section_area_of_solid_at_1p5m(brep, tol, loose_ang_rad, strict_ang_rad):
+def section_area_of_solid_at_1p5m(brep, tol, loose_ang_rad, strict_ang_rad,
+                                 section_curve_output=None):
     """
     Returns:
       (success, section_area, base_area, base_z, section_z, loop_count, base_face_count, problem_text)
@@ -330,7 +371,7 @@ def section_area_of_solid_at_1p5m(brep, tol, loose_ang_rad, strict_ang_rad):
     )
 
     if not success or not raw_curves:
-        return False, 0.0, base_area, base_z, section_z, 0, base_face_count, "No section curves at 1.5 m above base"
+        return False, 0.0, base_area, base_z, section_z, 0, base_face_count, 'No section curves at {:g} m above base'.format(section_height_metres())
 
     closed_loops, open_curves = clean_joined_section_curves(raw_curves, tol)
 
@@ -345,6 +386,9 @@ def section_area_of_solid_at_1p5m(brep, tol, loose_ang_rad, strict_ang_rad):
 
     if area <= tol * tol:
         return False, 0.0, base_area, base_z, section_z, loop_count, base_face_count, "Section area is zero or below tolerance"
+
+    if section_curve_output is not None:
+        section_curve_output.extend(item['curve'].DuplicateCurve() for item in loop_data)
 
     # Open curves indicate possible tolerance or modelling issues.
     # We still return the area from the closed loops, but report the warning upstream.
@@ -444,124 +488,316 @@ def extract_solids_from_instance(instance_obj, parent_xform, out_list, origin_id
     visited_idef_ids.remove(idef.Id)
 
 
+SELECTION_TYPES = (Rhino.DocObjects.ObjectType.Surface |
+                   Rhino.DocObjects.ObjectType.Brep |
+                   Rhino.DocObjects.ObjectType.Extrusion |
+                   Rhino.DocObjects.ObjectType.InstanceReference)
+
+
+def select_objects(doc):
+    """No settings means no opening dialog: preselection or the native picker."""
+    preselected = [obj.Id for obj in doc.Objects.GetSelectedObjects(False, False)
+                   if obj.ObjectType & SELECTION_TYPES]
+    if preselected:
+        return preselected
+    getter = Rhino.Input.Custom.GetObject()
+    try:
+        getter.SetCommandPrompt('Select volumes or blocks for QuickArea')
+        getter.GeometryFilter = SELECTION_TYPES
+        getter.SubObjectSelect = False
+        getter.EnablePreSelect(True, True)
+        getter.GetMultiple(1, 0)
+        if getter.CommandResult() != Rhino.Commands.Result.Success:
+            return []
+        return [getter.Object(i).ObjectId for i in range(getter.ObjectCount)]
+    finally:
+        getter.Dispose()
+
+
+def create_invalid_dialog():
+    dlg = ui.AquaDialog('QuickArea | Selection', 'Measurement / QuickArea',
+                        'Some items will be skipped', '')
+    dlg.choice = 'cancel'
+    dlg.tag_checkbox = ui.checkbox('Tag skipped items in the model')
+    dlg.tag_checkbox.Checked = False
+    notice = ui.content_layout(14)
+    notice.AddRow(ui.label('Open surfaces and blocks without closed volumes\n'
+                          'cannot contribute to the section area.', muted=True))
+    notice.AddRow(dlg.tag_checkbox)
+    dlg.body.AddRow(ui.InfoPanel(notice))
+    dlg.cancel_button = ui.button('Cancel')
+    dlg.continue_button = ui.button('Continue', True)
+
+    def proceed(sender, event):
+        dlg.choice = 'continue_tag' if dlg.tag_checkbox.Checked else 'continue_no_tag'
+        dlg.Close(True)
+
+    dlg.continue_button.Click += proceed
+    dlg.cancel_button.Click += lambda s, e: dlg.Close(False)
+    dlg.DefaultButton = dlg.continue_button
+    dlg.AbortButton = dlg.cancel_button
+    dlg.finish(ui.action_row(dlg.cancel_button, dlg.continue_button),
+               'Only closed volumes will be measured.')
+    return dlg
+
+
 def ask_invalid_dialog():
-    """
-    Returns:
-      "cancel" | "continue_tag" | "continue_no_tag"
-    """
-    dlg = forms.Dialog[bool]()
-    dlg.Title = "QuickArea – Invalid Selection"
-    dlg.Padding = drawing.Padding(12)
-    dlg.Resizable = False
-
-    msg = forms.Label()
-    msg.Text = (
-        "Some selected items are invalid/open (or blocks contain open Breps),\n"
-        "and will not be processed.\n\n"
-        "How would you like to continue?"
-    )
-
-    btn_cancel = forms.Button()
-    btn_cancel.Text = "Cancel"
-    btn_tag = forms.Button()
-    btn_tag.Text = "Continue and tag invalid"
-    btn_no_tag = forms.Button()
-    btn_no_tag.Text = "Continue without tagging"
-
-    for b in (btn_cancel, btn_tag, btn_no_tag):
-        b.Width = 210
-
-    layout = forms.DynamicLayout()
-    layout.Spacing = drawing.Size(8, 8)
-    layout.AddRow(msg)
-    layout.AddRow(None)
-    layout.AddRow(btn_tag)
-    layout.AddRow(btn_no_tag)
-    layout.AddRow(btn_cancel)
-    dlg.Content = layout
-
-    choice = {"value": "cancel"}
-
-    def _set(val):
-        choice["value"] = val
-        dlg.Close(True)
-
-    btn_cancel.Click += lambda s, e: _set("cancel")
-    btn_tag.Click += lambda s, e: _set("continue_tag")
-    btn_no_tag.Click += lambda s, e: _set("continue_no_tag")
-
-    dlg.ShowModal(Rhino.UI.RhinoEtoApp.MainWindow)
-    return choice["value"]
+    dlg = create_invalid_dialog()
+    dlg.show_for_doc(sc.doc)
+    return dlg.choice
 
 
-def show_result_dialog(pretty_section_area, pretty_base_area, rounded_section_value, rounded_base_value, reduction_percent, solid_count, loop_count, base_face_count):
-    dlg = forms.Dialog[bool]()
-    dlg.Title = "QuickArea – 1.5 m Section Result"
-    dlg.Padding = drawing.Padding(12)
-    dlg.Resizable = False
-
-    label = forms.Label()
-    label.Text = (
-        "Base plane area:\n"
-        "{}\n"
-        "Rounded base value: {}\n\n"
-        "1.5 m section area:\n"
-        "{}\n"
-        "Rounded section value: {}\n\n"
-        "Reduction from base to 1.5 m section:\n"
-        "{}\n\n"
-        "Closed solids processed: {}\n"
-        "Base faces used: {}\n"
-        "Section loops used: {}\n"
-    ).format(
-        pretty_base_area,
-        rounded_base_value,
-        pretty_section_area,
-        rounded_section_value,
-        format_percent(reduction_percent),
-        solid_count,
-        base_face_count,
-        loop_count
-    )
-
-    btn_copy = forms.Button()
-    btn_copy.Text = "Copy to clipboard"
-    btn_ok = forms.Button()
-    btn_ok.Text = "OK"
-
-    btn_copy.Width = 180
-    btn_ok.Width = 100
-
-    layout = forms.DynamicLayout()
-    layout.Spacing = drawing.Size(8, 8)
-    layout.AddRow(label)
-    layout.AddRow(None)
-    layout.AddRow(btn_copy, btn_ok)
-    dlg.Content = layout
-
-    def on_copy(sender, e):
-        Clipboard.SetText(str(rounded_section_value))
-        dlg.Close(True)
-
-    def on_ok(sender, e):
-        dlg.Close(True)
-
-    btn_copy.Click += on_copy
-    btn_ok.Click += on_ok
-
-    dlg.ShowModal(Rhino.UI.RhinoEtoApp.MainWindow)
+def format_display_number(value, decimals):
+    text = '{:.{}f}'.format(value, decimals)
+    # Tolerance-scale calculation noise should display as 0.00, not -0.00.
+    return text[1:] if text.startswith('-') and float(text) == 0 else text
 
 
-def main():
-    ids = rs.GetObjects(
-        "Select closed Breps (volumes) and/or Blocks to compute 1.5 m section area",
-        rs.filter.surface | rs.filter.polysurface | rs.filter.instance,
-        preselect=True,
-        select=True
-    )
-    if not ids:
-        return
+def create_result_dialog(pretty_section_area, pretty_base_area, rounded_section_value,
+                         rounded_base_value, reduction_percent, solid_count,
+                         loop_count, base_face_count, section_area=None, base_area=None,
+                         section_curves=None, coverage=None):
+    # Main passes full-precision numbers; formatted arguments remain compatible
+    # with callers that build a result dialog directly.
+    section_area = float(pretty_section_area.split()[0]) if section_area is None else section_area
+    base_area = float(pretty_base_area.split()[0]) if base_area is None else base_area
+    dlg = ui.AquaDialog('QuickArea | Result', 'Measurement / QuickArea',
+                        'Area summary', '')
+    dlg.recalculate = False
+    dlg.height_button = ui.button('Change height')
+    height_row = ui.content_layout(0)
+    height_row.AddRow(ui.label('Measured at {:g} m above each local base.'.format(section_height_metres()),
+                               ui.CAPTION_SIZE, True), None, dlg.height_button)
+    dlg.body.AddRow(height_row)
+    coverage = coverage or {}
+    dlg.coverage_warning = None
+    if coverage.get('warning'):
+        warning = ui.content_layout(6)
+        dlg.coverage_warning = ui.label(coverage['warning'])
+        dlg.coverage_warning.TextColor = ui.colour('#a34535', '#f0ab99')
+        warning.AddRow(dlg.coverage_warning)
+        if coverage.get('failed_breps'):
+            warning.AddRow(ui.label('Coral outlines mark uncounted solids.', ui.CAPTION_SIZE, True))
+        dlg.body.AddRow(ui.InfoPanel(warning))
+    section = ui.content_layout(8)
+    section.AddRow(ui.label('Section area', muted=True))
+    dlg.section_label = ui.label('', ui.VALUE_SIZE)
+    section.AddRow(dlg.section_label)
+    dlg.body.AddRow(ui.InfoPanel(section))
+    precision = ui.content_layout(6)
+    dlg.unit_index = 0
+    dlg.unit_buttons = [ui.button(unit[1], index == 0) for index, unit in enumerate(AREA_UNITS)]
+    for control, unit in zip(dlg.unit_buttons, AREA_UNITS):
+        control.Width = 66
+        control.ToolTip = unit[0]
+    unit_row = ui.content_layout(0)
+    unit_row.AddRow(ui.label('Area unit', muted=True), None, *dlg.unit_buttons)
+    precision.AddRow(unit_row)
+    precision_header = ui.content_layout(0)
+    dlg.decimal_label = ui.label('2', muted=True)
+    precision_header.AddRow(ui.label('Decimal places', muted=True), None, dlg.decimal_label)
+    precision.AddRow(precision_header)
+    dlg.decimal_slider = forms.Slider()
+    dlg.decimal_slider.MinValue = 0
+    dlg.decimal_slider.MaxValue = 6
+    dlg.decimal_slider.TickFrequency = 1
+    dlg.decimal_slider.SnapToTick = True
+    dlg.decimal_slider.Value = 2
+    precision.AddRow(dlg.decimal_slider)
+    dlg.body.AddRow(precision)
+    metrics = ui.content_layout()
+    metrics.Spacing = drawing.Size(24, 10)
+    dlg.base_label = ui.label('')
+    metrics.AddRow(ui.label('Base plane area', muted=True), None, dlg.base_label)
+    dlg.reduction_label = ui.label('')
+    metrics.AddRow(ui.label('Reduction from base', muted=True), None, dlg.reduction_label)
+    dlg.body.AddRow(ui.InfoPanel(metrics))
+    dlg.body.AddRow(ui.label('{} {} counted · {} {} · {} {}'.format(
+        solid_count, 'solid' if solid_count == 1 else 'solids',
+        base_face_count, 'base face' if base_face_count == 1 else 'base faces',
+        loop_count, 'section loop' if loop_count == 1 else 'section loops'), ui.CAPTION_SIZE, True))
+    dlg.copy_button = ui.button('Copy section area', True)
+    dlg.copy_base_button = ui.button('Copy base plane area')
+    dlg.done_button = ui.button('Close')
 
+    def update_precision(sender=None, event=None):
+        decimals = dlg.decimal_slider.Value
+        unit_index = dlg.unit_index
+        unit = AREA_UNITS[unit_index][1]
+        dlg.decimal_label.Text = str(decimals)
+        dlg.copy_value = format_display_number(area_in_unit(section_area, unit_index), decimals)
+        dlg.base_copy_value = format_display_number(area_in_unit(base_area, unit_index), decimals)
+        dlg.section_label.Text = dlg.copy_value + ' ' + unit
+        dlg.base_label.Text = dlg.base_copy_value + ' ' + unit
+        dlg.reduction_label.Text = format_display_number(reduction_percent, decimals) + '%'
+        dlg.set_status('')
+
+    def copy(value):
+        try:
+            ui.copy_text_to_clipboard(value)
+            dlg.Close(True)
+        except Exception:
+            dlg.set_status('Clipboard unavailable. Try copying again.')
+
+    def change_height(sender, event):
+        changed = {'value': None}
+        def ask(s, e):
+            changed['value'] = prompt_section_height(section_height_metres())
+        Rhino.UI.EtoExtensions.PushPickButton(dlg, ask)
+        if changed['value'] is not None:
+            sc.sticky[HEIGHT_STICKY_KEY] = changed['value']
+            dlg.recalculate = True
+            dlg.Close(True)
+
+    def choose_unit(index):
+        dlg.unit_index = index
+        for button_index, control in enumerate(dlg.unit_buttons):
+            ui.set_button_selected(control, button_index == index)
+        update_precision()
+
+    dlg.height_button.Click += change_height
+    dlg.copy_button.Click += lambda s, e: copy(dlg.copy_value)
+    dlg.copy_base_button.Click += lambda s, e: copy(dlg.base_copy_value)
+    for index, control in enumerate(dlg.unit_buttons):
+        control.Click += lambda s, e, index=index: choose_unit(index)
+    dlg.decimal_slider.ValueChanged += update_precision
+    dlg.done_button.Click += lambda s, e: dlg.Close(True)
+    dlg.DefaultButton = dlg.done_button
+    dlg.AbortButton = dlg.done_button
+    dlg.finish(ui.action_row(dlg.done_button, dlg.copy_base_button, dlg.copy_button))
+    update_precision()
+    return dlg
+
+
+class SectionPreview(Rhino.Display.DisplayConduit):
+    """Temporary world-space section loops; never adds document objects."""
+    def __init__(self, doc, curves):
+        super().__init__()
+        ui.refresh_theme()
+        self.doc = doc
+        self.curves = curves
+        self.SpaceFilter = Rhino.DocObjects.ActiveSpace.ModelSpace
+        self.color = Color.FromArgb(177, 228, 223) if ui.DARK else Color.FromArgb(36, 110, 123)
+        self.bounds = Rhino.Geometry.BoundingBox.Empty
+        for curve in curves:
+            self.bounds.Union(curve.GetBoundingBox(True))
+        self.draw_count = 0
+        self.failed_breps = []
+        self.failure_color = Color.FromArgb(240, 171, 153) if ui.DARK else Color.FromArgb(163, 69, 53)
+
+    def set_failures(self, breps):
+        self.failed_breps = breps
+        for brep in breps:
+            self.bounds.Union(brep.GetBoundingBox(True))
+
+    def CalculateBoundingBox(self, event):
+        if event.RhinoDoc == self.doc and self.bounds.IsValid:
+            event.IncludeBoundingBox(self.bounds)
+
+    def DrawForeground(self, event):
+        if event.RhinoDoc != self.doc:
+            return
+        for curve in self.curves:
+            event.Display.DrawCurve(curve, self.color, 3)
+        for brep in self.failed_breps:
+            event.Display.DrawBrepWires(brep, self.failure_color, 3)
+        self.draw_count += 1
+
+
+def show_result_dialog(*args):
+    curves = args[10] if len(args) > 10 else []
+    coverage = args[11] if len(args) > 11 else {}
+    failed_breps = coverage.get('failed_breps', [])
+    preview = SectionPreview(sc.doc, curves)
+    try:
+        preview.set_failures(failed_breps)
+        preview.Enabled = True
+        sc.doc.Views.Redraw()
+        dialog = create_result_dialog(*args)
+        dialog.show_for_doc(sc.doc, picking=True)
+        return dialog.recalculate
+    finally:
+        preview.Enabled = False
+        sc.doc.Views.Redraw()
+        for curve in curves:
+            curve.Dispose()
+        for brep in failed_breps:
+            brep.Dispose()
+
+
+def create_issues_dialog(doc, problems, warnings, tagged=False):
+    """Keep object identities attached to actionable issue entries."""
+    import textwrap
+    dlg = ui.AquaDialog('QuickArea | Section issues', 'Measurement / QuickArea',
+                        'Review section issues', 'Click an object to select it in Rhino.')
+    entries = ui.content_layout(14)
+    dlg.issue_buttons = []
+    dlg.issue_object_ids = []
+
+    def select_issue(object_id, name):
+        obj = doc.Objects.FindId(object_id)
+        if obj is None or obj.IsDeleted:
+            dlg.set_status('This object no longer exists in the document.')
+            return
+        if obj.IsHidden or obj.IsLocked:
+            dlg.set_status('This object is hidden or locked and cannot be selected.')
+            return
+        previous = [o.Id for o in doc.Objects.GetSelectedObjects(False, False)]
+        doc.Objects.UnselectAll()
+        if doc.Objects.Select(object_id):
+            dlg.set_status('Selected ' + name)
+        else:
+            for previous_id in previous:
+                doc.Objects.Select(previous_id)
+            dlg.set_status('This object cannot currently be selected.')
+        doc.Views.Redraw()
+
+    for heading, items in [('Not counted', problems), ('Counted with warnings', warnings)]:
+        if not items:
+            continue
+        entries.AddRow(ui.label(heading, muted=True))
+        grouped = {}
+        for object_id, reason in items:
+            grouped.setdefault(object_id, []).append(reason)
+        for object_id, reasons in grouped.items():
+            obj = doc.Objects.FindId(object_id)
+            name = obj.Attributes.Name if obj else ''
+            if not name and isinstance(obj, Rhino.DocObjects.InstanceObject):
+                name = obj.InstanceDefinition.Name
+            name = ('{} · {}'.format(name, str(object_id)[:8]) if name else
+                    'Object ' + str(object_id)[:8])
+            control = ui.button(name)
+            control.ToolTip = 'Select this object in Rhino'
+            control.Click += lambda s, e, object_id=object_id, name=name: select_issue(object_id, name)
+            dlg.issue_buttons.append(control)
+            dlg.issue_object_ids.append(object_id)
+            entry = ui.content_layout(6)
+            entry.AddRow(control, None)
+            reason_text = '\n'.join(textwrap.fill('• ' + reason, 58,
+                                     subsequent_indent='  ') for reason in reasons)
+            entry.AddRow(ui.label(reason_text))
+            entries.AddRow(entry)
+    scroll = forms.Scrollable()
+    scroll.Size = drawing.Size(430, min(280, 40 + 90 * len(dlg.issue_buttons)))
+    scroll.ExpandContentWidth = True
+    scroll.ExpandContentHeight = False
+    scroll.Border = forms.BorderType.NONE
+    scroll.BackgroundColor = ui.FIELD
+    ui.theme_scrollbars(scroll)
+    scroll.Content = entries
+    dlg.body.AddRow(ui.InfoPanel(scroll))
+    if tagged:
+        dlg.body.AddRow(ui.label('Problem items were tagged on ' + WARN_LAYER_NAME + '.',
+                                 ui.CAPTION_SIZE, True))
+    done = ui.button('Close', True)
+    done.Click += lambda s, e: dlg.Close(True)
+    dlg.DefaultButton = done
+    dlg.AbortButton = done
+    dlg.finish(ui.action_row(done))
+    return dlg
+
+
+def measure_selection(ids):
     doc_tol = sc.doc.ModelAbsoluteTolerance
 
     # A loose filter is used to find candidate base faces.
@@ -635,7 +871,8 @@ def main():
                 if pt:
                     tagger.add_dot("OPEN BREP", pt)
 
-        rs.MessageBox("No closed Breps to process (including inside selected blocks).", 48, "QuickArea")
+        ui.message_dialog(sc.doc, 'QuickArea', 'No closed volumes found.',
+                          'No closed Breps to process (including inside selected blocks).')
         return
 
     if any_invalid_selection and tag_invalid:
@@ -656,19 +893,26 @@ def main():
     total_base_area = 0.0
     total_loops = 0
     total_base_faces = 0
+    preview_curves = []
     problems = []  # (origin_id, reason)
     warnings = []  # (origin_id, warning_text)
+    counted_origins = set()
+    counted_solids = 0
+    failed_breps = []
 
     for origin_id, brep in solids:
         ok, section_area, base_area, base_z, section_z, loop_count, base_face_count, problem = section_area_of_solid_at_1p5m(
             brep,
             doc_tol,
             loose_filter_rad,
-            strict_rad
+            strict_rad,
+            section_curve_output=preview_curves
         )
 
         # Good result, but with a non-fatal warning such as ignored open curves.
         if ok:
+            counted_solids += 1
+            counted_origins.add(origin_id)
             total_section_area += section_area
             total_base_area += base_area
             total_loops += loop_count
@@ -679,6 +923,7 @@ def main():
 
         # Failed result.
         problems.append((origin_id, problem))
+        failed_breps.append(brep.DuplicateBrep())
 
         amp_brep = Rhino.Geometry.AreaMassProperties.Compute(brep)
         cen = amp_brep.Centroid if amp_brep else brep.GetBoundingBox(True).Center
@@ -689,36 +934,8 @@ def main():
             rs.UnselectAllObjects()
             rs.SelectObjects(list({p[0] for p in problems}))
 
-        lines = []
-
-        if problems:
-            lines.append("Some solids could not be counted:")
-            by_obj = {}
-            for oid, reason in problems:
-                by_obj.setdefault(oid, []).append(reason)
-
-            for oid, items in by_obj.items():
-                lines.append("- Object {}: {} issue(s)".format(str(oid)[:8], len(items)))
-                for reason in items:
-                    lines.append("    • {}".format(reason))
-
-        if warnings:
-            if lines:
-                lines.append("")
-            lines.append("Some solids were counted with warnings:")
-            by_obj = {}
-            for oid, warning in warnings:
-                by_obj.setdefault(oid, []).append(warning)
-
-            for oid, items in by_obj.items():
-                lines.append("- Object {}: {} warning(s)".format(str(oid)[:8], len(items)))
-                for warning in items:
-                    lines.append("    • {}".format(warning))
-
-        if tag_invalid and tagger.layer_created:
-            lines.append("\nProblem items were tagged with TextDots on layer '{}'.".format(WARN_LAYER_NAME))
-
-        rs.MessageBox("\n".join(lines), 48, "QuickArea – 1.5 m Section Issues")
+        create_issues_dialog(sc.doc, problems, warnings,
+                             tag_invalid and tagger.layer_created).show_for_doc(sc.doc, picking=True)
 
     pretty_section = format_area_with_units(total_section_area)
     pretty_base = format_area_with_units(total_base_area)
@@ -732,20 +949,45 @@ def main():
         reduction_percent = 0.0
 
     print("QuickArea — Total base plane area: {}".format(pretty_base))
-    print("QuickArea — Total 1.5 m section area: {}".format(pretty_section))
-    print("QuickArea — Reduction from base to 1.5 m section: {}".format(format_percent(reduction_percent)))
-    print("QuickArea — Rounded section value copied on request: {}".format(rounded_section_value))
+    print('QuickArea — Total {:g} m section area: {}'.format(section_height_metres(), pretty_section))
+    print('QuickArea — Reduction from base: {}'.format(format_percent(reduction_percent)))
+    print("QuickArea — Display and clipboard precision can be adjusted in the result.")
 
-    show_result_dialog(
+    excluded = len(set(ids) - counted_origins)
+    partial = len((set(origin for origin, reason in problems) | set(open_item_ids)) & counted_origins)
+    notes = []
+    if excluded:
+        notes.append('{} of {} selected {} excluded from totals.'.format(
+            excluded, len(set(ids)), 'object' if len(set(ids)) == 1 else 'objects'))
+    if partial:
+        notes.append('{} selected {} only partly counted.'.format(
+            partial, 'block is' if partial == 1 else 'blocks are'))
+    if problems and all(reason.startswith('No section curves at ') for origin, reason in problems):
+        notes.append('No section at {:g} m for {} {}.'.format(
+            section_height_metres(), len(problems), 'solid' if len(problems) == 1 else 'solids'))
+    coverage = {'warning': '\n'.join(notes), 'failed_breps': failed_breps,
+                'excluded_count': excluded, 'partial_count': partial}
+
+    return show_result_dialog(
         pretty_section,
         pretty_base,
         rounded_section_value,
         rounded_base_value,
         reduction_percent,
-        len(solids),
+        counted_solids,
         total_loops,
-        total_base_faces
+        total_base_faces,
+        total_section_area,
+        total_base_area,
+        preview_curves,
+        coverage
     )
+
+
+def main():
+    ids = select_objects(sc.doc)
+    while ids and measure_selection(ids):
+        pass
 
 
 if __name__ == "__main__":

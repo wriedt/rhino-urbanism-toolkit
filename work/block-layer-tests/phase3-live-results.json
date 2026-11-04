@@ -1,0 +1,19 @@
+{
+  "passed": 13,
+  "checks": [
+    "Visible Assign defaults to root definition only",
+    "Include nested exposes and selects both local nesting levels",
+    "One staging action assigns all three selected definitions",
+    "Visible preview shows four reference edits affecting six occurrences",
+    "Apply cleanup edits roots and both nested reference objects",
+    "One Undo restores all three assignments, roots, and nested layers",
+    "One Redo restores all assignments and nested cleanup",
+    "Visible preview blocks shared edits when a hidden parent occurrence exists",
+    "Whole-file Cleanup reports and preserves protected shared nested references",
+    "Whole-file Cleanup applies shared nested rules after all parent copies are visible",
+    "Standalone Cleanup Undo restores parent and nested layers together",
+    "Recovered original demo objects retain their IDs, transforms, layers, and assignments",
+    "All live test fixtures removed and original selection restored"
+  ],
+  "method": "Rhino MCP, direct Eto control events and rendered WPF captures"
+}

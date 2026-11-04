@@ -1,0 +1,20 @@
+{
+  "passed": 14,
+  "checks": [
+    "Cleanup opens one review for two paths shared by three definitions",
+    "Creation toggle and explicit per-path skip work together",
+    "Continue creates the intended parent and child layer and updates both shared rules",
+    "Cleanup moves resolved copies while preserving the explicitly skipped parent target",
+    "One Undo removes created layers and restores rules and placements",
+    "One Redo restores created targets and moves without moving skipped copies",
+    "Cancel aborts the whole cleanup, creates no layers, and prevents other pending moves",
+    "Preview blocks Apply while missing targets need review",
+    "Resolve missing layers opens a document-owned review inside the preview",
+    "Resolved preview refreshes and enables Apply without moving instances",
+    "Keep assignments only preserves saved resolution and creates no instance moves",
+    "Redo preserves the actual created layer IDs in saved assignments",
+    "Original objects, transforms, layers and assignments remain unchanged",
+    "Temporary objects, definitions and created layers removed; selection restored"
+  ],
+  "method": "Rhino MCP and rendered WPF dialog captures"
+}

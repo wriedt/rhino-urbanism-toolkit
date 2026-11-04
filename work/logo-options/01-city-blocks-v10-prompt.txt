@@ -1,0 +1,11 @@
+Built-in image generation tool; reference: 01-city-blocks-v9-four-colors.png
+Edit the supplied latest Rhino Urbanism logo. The user wants the large anatomical shapes around the eye, ear, horn and nose broken down into smaller urban parcels too, while KEEPING THE OUTLINE. Here "dissolve" means INTERNAL SUBDIVISION, NOT scattered fragments or disappearing silhouette.
+Preserve the exact overall rounded head silhouette, left-facing rhino profile, both horn tips, ear tip, rounded muzzle and white almond-shaped eye. Keep the existing urban fabric on the right substantially unchanged.
+Extend the same Barcelona-old-town-inspired irregular street network through the currently large solid areas on the LEFT:
+- split the large main horn into 3–4 substantial tapering parcels using 2–3 narrow angled white cross-streets, preserving its elegant outer curve and tip;
+- split the smaller horn into 2 parcels;
+- split the ear and its base into 3 irregular connected-in-outline parcels;
+- split the large dark face block around the eye into 4–5 varied polygons, with streets routed above/below/beside the eye; retain the entire eye as one clean white almond inside a dark enough parcel, no street crossing the eye;
+- split the teal nose/muzzle block into 3–4 irregular parcels with a few clipped corners.
+Streets should connect naturally into existing junctions, have consistent visual weight with the current narrow white streets, use slightly bent and offset routes and selective chamfers. Avoid uniform slices, grids or tiny shards. The whole rhino should now feel made of the same urban fabric, while remaining instantly recognizable. Outer edges remain smooth and in the same positions, simply interrupted by the new narrow street cuts. No detached blocks, no dissolution outside the outline, no courtyards.
+Use the same FOUR flat colors #263f4b dark slate, #355c70 muted blue, #246e7b teal, #76aaa8 pale aqua, distributing different colors to edge-neighboring parcels across streets. Preserve white background, centered composition and generous margins. No text, shadows, textures, gradients or added borders. Crisp flat vector-like logo.

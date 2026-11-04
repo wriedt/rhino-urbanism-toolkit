@@ -1,0 +1,21 @@
+{
+  "passed": 15,
+  "checks": [
+    "Native picker deduplicates three selected copies into two definitions",
+    "Visible bulk editor stages rules without writing the model",
+    "Save with Apply now opens a scoped preview with three moves and one hidden skip",
+    "Apply cleanup button moves all three eligible copies",
+    "Apply now leaves unrelated and hidden copies in place",
+    "One native Undo restores both bulk rules and all layer moves",
+    "One native Redo restores bulk rules and moves",
+    "Manage command lists all four used top-level definitions",
+    "Remove assignment button stages removal without altering saved rules",
+    "Bulk removal saves without moving instances",
+    "Bulk removal Undo restores both assignments",
+    "Bulk removal Redo removes both assignments",
+    "Keep assignments only closes preview, retains reassignment, and performs no moves",
+    "Original objects, transforms, layers and saved assignments preserved",
+    "Test fixtures removed and original selection restored"
+  ],
+  "method": "Rhino MCP; direct Eto control events and WPF rendered captures"
+}

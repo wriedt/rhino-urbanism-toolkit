@@ -1,0 +1,4 @@
+interface:
+  display_name: "Rhino Script UI"
+  short_description: "Consistent aqua UIs for Rhino scripts"
+  default_prompt: "Use $rhino-script-ui to create or refine a Rhino script interface using the aqua drawing-office conventions."

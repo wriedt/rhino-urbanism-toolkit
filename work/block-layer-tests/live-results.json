@@ -1,0 +1,11 @@
+{
+  "passed": 6,
+  "checks": [
+    "Assignment Undo",
+    "Assignment Redo",
+    "Two-instance cleanup Undo",
+    "Two-instance cleanup Redo",
+    "Native picker and chooser acceptance",
+    "Native chooser cancellation preserves assignment"
+  ]
+}

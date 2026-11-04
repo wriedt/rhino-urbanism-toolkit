@@ -1,6 +1,6 @@
 #! python 3
 # -*- coding: utf-8 -*-
-"""Rhino Urbanism prototype: move a model frame to pan a Top layout detail.
+"""Rhino Urbanism Toolkit prototype: move a model frame to pan a Top layout detail.
 
 Run in Rhino 8 ScriptEditor (Python 3). Link from a layout; then use normal
 Move or Gumball in model space. Run again for Link / Refresh / Stop.

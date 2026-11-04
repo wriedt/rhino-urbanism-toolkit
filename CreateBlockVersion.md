@@ -8,7 +8,7 @@ instance's current definition, then switches only selected instances to it.
 Paste this in Rhino's command line or a toolbar button:
 
 ```text
-! _-ScriptEditor _Run "C:\Projects\rhino-urbanism\CreateBlockVersion.py"
+! _-ScriptEditor _Run "C:\Projects\rhino-urbanism-toolkit\CreateBlockVersion.py"
 ```
 
 You can preselect blocks or select them when prompted. Multiple selected

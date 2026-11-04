@@ -7,16 +7,16 @@
   },
   "id": "6ac6211b-d98c-47f5-95c0-5a542d379a2c",
   "identity": {
-    "name": "rhino-urbanism",
+    "name": "rhino-urbanism-toolkit",
     "version": "0.1-beta",
     "publisher": {
       "email": "runewriedt@gmail.com",
       "name": "Rune Wriedt"
     },
-    "description": "Tools for working with urbanism projects in Rhino3D",
+    "description": "Rhino Urbanism Toolkit (RUT): utility scripts for architecture and urbanism studios working in Rhino 8",
     "copyright": "Copyright \u00A9 2026 Rune Wriedt",
     "license": "GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007",
-    "url": "https://github.com/wriedt/rhino-urbanism",
+    "url": "https://github.com/wriedt/rhino-urbanism-toolkit",
     "image": {
       "light": {
         "type": "svg",

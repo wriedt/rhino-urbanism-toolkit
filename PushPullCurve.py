@@ -849,7 +849,7 @@ class PushPreview(object):
                 resources.extend([font, brush])
                 graphics.DrawString(value, font, brush, RectangleF(x, y, width, height))
 
-            text('Rhino Urbanism  /  Push/pull', 13, muted, 20, 15, 410, 22)
+            text('RUT  /  Push/pull', 13, muted, 20, 15, 410, 22)
             graphics.DrawLine(border, PointF(20, 43), PointF(430, 43))
             text('{:.3f} {}'.format(abs(result.get('signed_distance', 0)), self.unit_name),
                  28, ink, 20, 51, 410, 40)

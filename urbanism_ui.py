@@ -256,7 +256,7 @@ class AquaDialog(forms.Dialog[bool]):
     def __init__(self, title, category, heading, description):
         super().__init__()
         refresh_theme()
-        self.Title = 'Rhino Urbanism | ' + title
+        self.Title = 'RUT | ' + title
         self.WindowStyle = forms.WindowStyle.NONE
         self.MovableByWindowBackground = True
         self.Resizable = False
@@ -269,7 +269,7 @@ class AquaDialog(forms.Dialog[bool]):
         self.body.Spacing = drawing.Size(12, 16)
         self.body.BackgroundColor = drawing.Colors.Transparent
         self.header = content_layout(0)
-        brand = label('Rhino Urbanism · ' + category.split('/')[-1].strip(), CAPTION_SIZE, True)
+        brand = label('RUT · ' + category.split('/')[-1].strip(), CAPTION_SIZE, True)
         brand.VerticalAlignment = forms.VerticalAlignment.Center
         self.close_button = button('×')
         self.close_button.Width = 30

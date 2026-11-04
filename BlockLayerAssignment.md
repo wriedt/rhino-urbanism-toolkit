@@ -33,7 +33,7 @@ restores the new rules.
 Toolbar button or alias macro:
 
 ```text
-! _-ScriptEditor _Run "C:\Projects\rhino-urbanism\AssignBlockLayer.py"
+! _-ScriptEditor _Run "C:\Projects\rhino-urbanism-toolkit\AssignBlockLayer.py"
 ```
 
 ## Apply the rules
@@ -44,7 +44,7 @@ counts, assigned layers, and rule status. Definitions with only hidden, locked,
 or reference copies are shown read-only. Unused definitions are omitted.
 
 ```text
-! _-ScriptEditor _Run "C:\Projects\rhino-urbanism\ManageBlockLayers.py"
+! _-ScriptEditor _Run "C:\Projects\rhino-urbanism-toolkit\ManageBlockLayers.py"
 ```
 
 In either assignment editor, **Apply now after saving (preview first)** opens a
@@ -67,7 +67,7 @@ whole cleanup, including edits inside block definitions. Missing target layers
 open a single review dialog before cleanup changes anything.
 
 ```text
-! _-ScriptEditor _Run "C:\Projects\rhino-urbanism\CleanUpBlockLayers.py"
+! _-ScriptEditor _Run "C:\Projects\rhino-urbanism-toolkit\CleanUpBlockLayers.py"
 ```
 
 Cleanup moves only the instance's layer. It preserves geometry, transforms,

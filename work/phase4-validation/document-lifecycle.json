@@ -1,0 +1,18 @@
+{
+  "repeat_reuses_controller": true,
+  "other_document_events_ignored": true,
+  "other_document_close_ignored": true,
+  "close_clears_controller": true,
+  "close_detaches_events": true,
+  "clipboard_formats": [
+    "image/x-inkscape-svg",
+    "Scalable Vector Graphics",
+    "Portable Document Format",
+    "AutoCAD.r22",
+    "Rhino 8 3DM Geometry",
+    "Rhino 7 3DM Geometry",
+    "DeviceIndependentBitmap"
+  ],
+  "clipboard_test_safe": false,
+  "active_objects_after": 0
+}

@@ -1,0 +1,47 @@
+{
+  "rhino": "8.36.26296.17001",
+  "suites": [
+    {
+      "suite": "test_layer_tools_rhino.py",
+      "passed": 50,
+      "error": null,
+      "seconds": 0.166,
+      "drawing_unchanged": true,
+      "log": "Isolated 2 layers including required parents. Run UnisolateLayer.py to restore.\nIsolated 4 layers including required parents. Run UnisolateLayer.py to restore.\nRestored layer visibility. New layers retain their current settings.\nThere is no saved layer isolation in this document.\nIsolated 3 layers including required parents. Run UnisolateLayer.py to restore.\nRestored layer visibility. New layers retain their current settings.\nIsolated 3 layers including required parents. Run UnisolateLayer.py to restore.\nRestored layer visibility. New layers retain their current settings.\nIsolated 4 layers including required parents. Run UnisolateLayer.py to restore.\nRestored layer visibility. New layers retain their current settings.\nIsolated 3 layers including required parents. Run UnisolateLayer.py to restore.\nThere is no saved layer isolation in this document.\nIsolated 1 layers including required parents. Run UnisolateLayer.py to restore.\nRestored layer visibility. New layers retain their current settings.\nRestored layer visibility. New layers retain their current settings.\nIsolated 1 layers including required parents. Run UnisolateLayer.py to restore.\nRestored layer visibility. New layers retain their current settings.\nPASS: 50 layer-tool checks\n"
+    },
+    {
+      "suite": "test_layer_lock_tools_rhino.py",
+      "passed": 27,
+      "error": null,
+      "seconds": 0.062,
+      "drawing_unchanged": true,
+      "log": "Kept 2 layers unlocked including required parents. Run RUTUnisolateLockLayer to restore.\nKept 4 layers unlocked including required parents. Run RUTUnisolateLockLayer to restore.\nRestored layer locks. Visibility is unchanged.\nThere is no saved layer lock isolation in this document.\nKept 3 layers unlocked including required parents. Run RUTUnisolateLockLayer to restore.\nRestored layer locks. Visibility is unchanged.\nKept 3 layers unlocked including required parents. Run RUTUnisolateLockLayer to restore.\nRestored layer locks. Visibility is unchanged.\nIsolated 4 layers including required parents. Run UnisolateLayer.py to restore.\nKept 3 layers unlocked including required parents. Run RUTUnisolateLockLayer to restore.\nRestored layer locks. Visibility is unchanged.\nRestored layer visibility. New layers retain their current settings.\nKept 3 layers unlocked including required parents. Run RUTUnisolateLockLayer to restore.\nIsolated 3 layers including required parents. Run UnisolateLayer.py to restore.\nRestored layer visibility. New layers retain their current settings.\nRestored layer locks. Visibility is unchanged.\nKept 3 layers unlocked including required parents. Run RUTUnisolateLockLayer to restore.\nThere is no saved layer lock isolation in this document.\nRestored layer locks. Visibility is unchanged.\nKept 1 layers unlocked including required parents. Run RUTUnisolateLockLayer to restore.\nRestored layer locks. Visibility is unchanged.\nPASS: 27 lock-isolation checks\n"
+    },
+    {
+      "suite": "test_layer_zero_rhino.py",
+      "passed": 20,
+      "error": null,
+      "seconds": 0.049,
+      "drawing_unchanged": true,
+      "log": "Isolated 2 layers including required parents. Run UnisolateLayer.py to restore.\nRestored layer visibility. New layers retain their current settings.\nKept 2 layers unlocked including required parents. Run RUTUnisolateLockLayer to restore.\nRestored layer locks. Visibility is unchanged.\nThere is no saved layer isolation in this document.\nThere is no saved layer lock isolation in this document.\nIsolated 2 layers including required parents. Run UnisolateLayer.py to restore.\nRestored layer visibility. New layers retain their current settings.\nKept 2 layers unlocked including required parents. Run RUTUnisolateLockLayer to restore.\nRestored layer locks. Visibility is unchanged.\nIsolated 1 layers including required parents. Run UnisolateLayer.py to restore.\nRestored layer visibility. New layers retain their current settings.\nPASS: 20 zero-layer checks\n"
+    },
+    {
+      "suite": "test_block_commands_rhino.py",
+      "passed": 38,
+      "error": null,
+      "seconds": 0.249,
+      "drawing_unchanged": true,
+      "log": "PASSED 38 document checks\n"
+    },
+    {
+      "suite": "tests/shape_builder/run_rhino.py",
+      "passed": 368,
+      "error": null,
+      "seconds": 0.79,
+      "drawing_unchanged": true,
+      "log": "{\"passed\": 73, \"failures\": [], \"seconds\": 0.16}\n{\"passed\": 40, \"failures\": []}\nPASS drag-start inheritance: 17\nPASS drag-start output types: 37\n{\"passed\": 49, \"failures\": []}\n{\"passed\": 33, \"failures\": []}\n{\"passed\": 119, \"failures\": []}\n{\"passed\": 368, \"suites\": [{\"suite\": \"test_shape_builder_rhino.py\", \"passed\": 73, \"failures\": []}, {\"suite\": \"test_shape_builder_hatches_rhino.py\", \"passed\": 40, \"failures\": []}, {\"suite\": \"test_shape_builder_masters_rhino.py\", \"passed\": 17, \"failures\": []}, {\"suite\": \"test_shape_builder_types_rhino.py\", \"passed\": 37, \"failures\": []}, {\"suite\": \"test_shape_builder_leftovers_rhino.py\", \"passed\": 49, \"failures\": []}, {\"suite\": \"test_shape_builder_edge_erase_rhino.py\", \"passed\": 33, \"failures\": []}, {\"suite\": \"test_shape_builder_attributes_rhino.py\", \"passed\": 119, \"failures\": []}], \"drawing_unchanged\": true}\n"
+    }
+  ],
+  "passed": 503,
+  "drawing_unchanged": true
+}

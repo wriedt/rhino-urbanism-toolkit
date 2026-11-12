@@ -1,0 +1,41 @@
+{
+  "passed": 368,
+  "suites": [
+    {
+      "suite": "test_shape_builder_rhino.py",
+      "passed": 73,
+      "failures": []
+    },
+    {
+      "suite": "test_shape_builder_hatches_rhino.py",
+      "passed": 40,
+      "failures": []
+    },
+    {
+      "suite": "test_shape_builder_masters_rhino.py",
+      "passed": 17,
+      "failures": []
+    },
+    {
+      "suite": "test_shape_builder_types_rhino.py",
+      "passed": 37,
+      "failures": []
+    },
+    {
+      "suite": "test_shape_builder_leftovers_rhino.py",
+      "passed": 49,
+      "failures": []
+    },
+    {
+      "suite": "test_shape_builder_edge_erase_rhino.py",
+      "passed": 33,
+      "failures": []
+    },
+    {
+      "suite": "test_shape_builder_attributes_rhino.py",
+      "passed": 119,
+      "failures": []
+    }
+  ],
+  "drawing_unchanged": true
+}

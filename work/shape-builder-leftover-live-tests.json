@@ -1,0 +1,12 @@
+{
+  "passed": [
+    "outside excursion rendered as open fragments in live preview",
+    "Finish creates one hatch and two open fragments",
+    "leftover source layer and user text preserved",
+    "document Undo restores full input polyline",
+    "Redo restores open fragments",
+    "test fixtures removed",
+    "all original object IDs and geometry CRCs unchanged",
+    "previous camera and selection restored"
+  ]
+}

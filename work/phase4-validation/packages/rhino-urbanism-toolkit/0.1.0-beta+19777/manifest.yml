@@ -1,0 +1,10 @@
+---
+name: rhino-urbanism-toolkit
+version: 0.1.0-beta+19777
+authors:
+- Rune Wriedt
+description: 'Rhino Urbanism Toolkit (RUT): utility scripts for architecture and urbanism studios working in Rhino 8'
+license: GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
+url: https://github.com/wriedt/rhino-urbanism-toolkit
+keywords:
+- guid:6ac6211b-d98c-47f5-95c0-5a542d379a2c

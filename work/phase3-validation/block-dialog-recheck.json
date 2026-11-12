@@ -1,0 +1,6 @@
+{
+  "passed": 94,
+  "error": null,
+  "drawing_unchanged": true,
+  "timer_cleanup": "Rhino remained responsive after dialog timers returned to idle"
+}

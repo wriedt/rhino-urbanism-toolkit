@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RhinoUI guid="6ac6211b-d98c-47f5-95c0-5a542d379a2c" plug_in_guid="6ac6211b-d98c-47f5-95c0-5a542d379a2c" major_ver="5" minor_ver="0" localize="False" default_language_id="1033">
+  <extend_rhino_menus />
+  <menus />
+  <tool_bar_groups>
+    <tool_bar_group guid="6ac6211b-d98c-47f5-95c0-5a542d379a2c" dock_bar_guid32="6ac6211b-d98c-47f5-95c0-5a542d379a2c" dock_bar_guid64="6ac6211b-d98c-47f5-95c0-5a542d379a2c" active_tool_bar_group="6ac6211b-d98c-47f5-95c0-5a542d379a2c" single_file="False" hide_single_tab="True">
+      <text><locale_1033>rhino-urbanism-toolkit</locale_1033></text>
+      <dock_bar_info visible="True"  floating="True" />
+      <tool_bar_group_item guid="6ac6211b-d98c-47f5-95c0-5a542d379a2c" major_version="1" minor_version="1">
+        <text><locale_1033>rhino-urbanism-toolkit</locale_1033></text>
+        <tool_bar_id>6ac6211b-d98c-47f5-95c0-5a542d379a2c</tool_bar_id>
+      </tool_bar_group_item>
+    </tool_bar_group>
+  </tool_bar_groups>
+  <tool_bars>
+    <tool_bar guid="6ac6211b-d98c-47f5-95c0-5a542d379a2c" bitmap_id="6ac6211b-d98c-47f5-95c0-5a542d379a2c" item_display_style="control_only">
+      <text><locale_1033>rhino-urbanism-toolkit</locale_1033></text>
+        <tool_bar_item guid="d05193ae-7a75-5852-8c39-9df7318ac2b4"
+                       button_display_mode="control_only"
+                       button_style="normal">
+            <text><locale_1033>RUTIsolateLayer</locale_1033></text>
+            <left_macro_id>d05193ae-7a75-5852-8c39-9df7318ac2b4</left_macro_id>
+        </tool_bar_item>        <tool_bar_item guid="91a2ffdc-ea86-5402-a357-e737d0443bd2"
+                       button_display_mode="control_only"
+                       button_style="normal">
+            <text><locale_1033>RUTUnisolateLayer</locale_1033></text>
+            <left_macro_id>91a2ffdc-ea86-5402-a357-e737d0443bd2</left_macro_id>
+        </tool_bar_item>        <tool_bar_item guid="e686cf9c-480d-5636-b9d8-e1024d6081d3"
+                       button_display_mode="control_only"
+                       button_style="normal">
+            <text><locale_1033>RUTIsolateLockLayer</locale_1033></text>
+            <left_macro_id>e686cf9c-480d-5636-b9d8-e1024d6081d3</left_macro_id>
+        </tool_bar_item>        <tool_bar_item guid="dcaa672e-1654-5539-bd06-6f7b28d48649"
+                       button_display_mode="control_only"
+                       button_style="normal">
+            <text><locale_1033>RUTUnisolateLockLayer</locale_1033></text>
+            <left_macro_id>dcaa672e-1654-5539-bd06-6f7b28d48649</left_macro_id>
+        </tool_bar_item>        <tool_bar_item guid="3a6c3996-bf1c-5595-bc37-6463de905fd8"
+                       button_display_mode="control_only"
+                       button_style="normal">
+            <text><locale_1033>RUTShowAllLayers</locale_1033></text>
+            <left_macro_id>3a6c3996-bf1c-5595-bc37-6463de905fd8</left_macro_id>
+        </tool_bar_item>        <tool_bar_item guid="bbda5618-e40b-5194-82c3-4d058d1d49ed"
+                       button_display_mode="control_only"
+                       button_style="normal">
+            <text><locale_1033>RUTUnlockAllLayers</locale_1033></text>
+            <left_macro_id>bbda5618-e40b-5194-82c3-4d058d1d49ed</left_macro_id>
+        </tool_bar_item>        <tool_bar_item guid="d6543cdf-d915-528b-9ecb-fc8fe7d19de7"
+                       button_display_mode="control_only"
+                       button_style="normal">
+            <text><locale_1033>RUTShowAndUnlockAllLayers</locale_1033></text>
+            <left_macro_id>d6543cdf-d915-528b-9ecb-fc8fe7d19de7</left_macro_id>
+        </tool_bar_item>        <tool_bar_item guid="0740432c-66f7-561f-8dcc-3312e32a8ef3"
+                       button_display_mode="control_only"
+                       button_style="normal">
+            <text><locale_1033>RUTToggleLayerExpansion</locale_1033></text>
+            <left_macro_id>0740432c-66f7-561f-8dcc-3312e32a8ef3</left_macro_id>
+        </tool_bar_item>        <tool_bar_item guid="5cfbc816-f99c-5136-8e85-0d9487df8a18"
+                       button_display_mode="control_only"
+                       button_style="normal">
+            <text><locale_1033>RUTCreateBlockVersion</locale_1033></text>
+            <left_macro_id>5cfbc816-f99c-5136-8e85-0d9487df8a18</left_macro_id>
+        </tool_bar_item>        <tool_bar_item guid="8aee8bd6-4da7-5571-9662-77fd1af7acc1"
+                       button_display_mode="control_only"
+                       button_style="normal">
+            <text><locale_1033>RUTConsolidateBlockVersions</locale_1033></text>
+            <left_macro_id>8aee8bd6-4da7-5571-9662-77fd1af7acc1</left_macro_id>
+        </tool_bar_item>        <tool_bar_item guid="65925b07-227a-5f33-a193-ae21e8b7a3ea"
+                       button_display_mode="control_only"
+                       button_style="normal">
+            <text><locale_1033>RUTRenameBlockFamily</locale_1033></text>
+            <left_macro_id>65925b07-227a-5f33-a193-ae21e8b7a3ea</left_macro_id>
+        </tool_bar_item>        <tool_bar_item guid="9015fe19-d7de-57eb-806e-64fc6f0dec5e"
+                       button_display_mode="control_only"
+                       button_style="normal">
+            <text><locale_1033>RUTAssignBlockLayer</locale_1033></text>
+            <left_macro_id>9015fe19-d7de-57eb-806e-64fc6f0dec5e</left_macro_id>
+        </tool_bar_item>        <tool_bar_item guid="5ee8fcb4-f61e-5e99-b37a-172f3d905c85"
+                       button_display_mode="control_only"
+                       button_style="normal">
+            <text><locale_1033>RUTApplyBlockLayers</locale_1033></text>
+            <left_macro_id>5ee8fcb4-f61e-5e99-b37a-172f3d905c85</left_macro_id>
+        </tool_bar_item>        <tool_bar_item guid="c35f1308-78a7-5e65-8997-8e72e2aafded"
+                       button_display_mode="control_only"
+                       button_style="normal">
+            <text><locale_1033>RUTShowBlockLayers</locale_1033></text>
+            <left_macro_id>c35f1308-78a7-5e65-8997-8e72e2aafded</left_macro_id>
+        </tool_bar_item>        <tool_bar_item guid="f6093092-ab08-552b-a993-be3af5c11c93"
+                       button_display_mode="control_only"
+                       button_style="normal">
+            <text><locale_1033>RUTQuickFloorArea</locale_1033></text>
+            <left_macro_id>f6093092-ab08-552b-a993-be3af5c11c93</left_macro_id>
+        </tool_bar_item>        <tool_bar_item guid="70785acc-809f-5f1a-88f7-990ede4c053f"
+                       button_display_mode="control_only"
+                       button_style="normal">
+            <text><locale_1033>RUTFloorArea</locale_1033></text>
+            <left_macro_id>70785acc-809f-5f1a-88f7-990ede4c053f</left_macro_id>
+        </tool_bar_item>        <tool_bar_item guid="8135732e-fb98-50cb-ae52-cb9ca20b6409"
+                       button_display_mode="control_only"
+                       button_style="normal">
+            <text><locale_1033>RUTPushPullCurve</locale_1033></text>
+            <left_macro_id>8135732e-fb98-50cb-ae52-cb9ca20b6409</left_macro_id>
+        </tool_bar_item>        <tool_bar_item guid="122c8f4b-f7ef-5145-ba20-2b5ee762b22f"
+                       button_display_mode="control_only"
+                       button_style="normal">
+            <text><locale_1033>RUTShapeBuilder</locale_1033></text>
+            <left_macro_id>122c8f4b-f7ef-5145-ba20-2b5ee762b22f</left_macro_id>
+        </tool_bar_item>
+    </tool_bar>
+  </tool_bars>
+  <macros>
+      <macro_item guid="d05193ae-7a75-5852-8c39-9df7318ac2b4" bitmap_id="d05193ae-7a75-5852-8c39-9df7318ac2b4">
+        <text><locale_1033>Macro.RUTIsolateLayer</locale_1033></text>
+        <tooltip><locale_1033>RUTIsolateLayer</locale_1033></tooltip>
+        <help_text><locale_1033>RUTIsolateLayer</locale_1033></help_text>
+        <button_text><locale_1033>RUTIsolateLayer</locale_1033></button_text>
+        <menu_text><locale_1033>RUTIsolateLayer</locale_1033></menu_text>
+        <script>! _RUTIsolateLayer</script>
+      </macro_item>      <macro_item guid="91a2ffdc-ea86-5402-a357-e737d0443bd2" bitmap_id="91a2ffdc-ea86-5402-a357-e737d0443bd2">
+        <text><locale_1033>Macro.RUTUnisolateLayer</locale_1033></text>
+        <tooltip><locale_1033>RUTUnisolateLayer</locale_1033></tooltip>
+        <help_text><locale_1033>RUTUnisolateLayer</locale_1033></help_text>
+        <button_text><locale_1033>RUTUnisolateLayer</locale_1033></button_text>
+        <menu_text><locale_1033>RUTUnisolateLayer</locale_1033></menu_text>
+        <script>! _RUTUnisolateLayer</script>
+      </macro_item>      <macro_item guid="e686cf9c-480d-5636-b9d8-e1024d6081d3" bitmap_id="e686cf9c-480d-5636-b9d8-e1024d6081d3">
+        <text><locale_1033>Macro.RUTIsolateLockLayer</locale_1033></text>
+        <tooltip><locale_1033>RUTIsolateLockLayer</locale_1033></tooltip>
+        <help_text><locale_1033>RUTIsolateLockLayer</locale_1033></help_text>
+        <button_text><locale_1033>RUTIsolateLockLayer</locale_1033></button_text>
+        <menu_text><locale_1033>RUTIsolateLockLayer</locale_1033></menu_text>
+        <script>! _RUTIsolateLockLayer</script>
+      </macro_item>      <macro_item guid="dcaa672e-1654-5539-bd06-6f7b28d48649" bitmap_id="dcaa672e-1654-5539-bd06-6f7b28d48649">
+        <text><locale_1033>Macro.RUTUnisolateLockLayer</locale_1033></text>
+        <tooltip><locale_1033>RUTUnisolateLockLayer</locale_1033></tooltip>
+        <help_text><locale_1033>RUTUnisolateLockLayer</locale_1033></help_text>
+        <button_text><locale_1033>RUTUnisolateLockLayer</locale_1033></button_text>
+        <menu_text><locale_1033>RUTUnisolateLockLayer</locale_1033></menu_text>
+        <script>! _RUTUnisolateLockLayer</script>
+      </macro_item>      <macro_item guid="3a6c3996-bf1c-5595-bc37-6463de905fd8" bitmap_id="3a6c3996-bf1c-5595-bc37-6463de905fd8">
+        <text><locale_1033>Macro.RUTShowAllLayers</locale_1033></text>
+        <tooltip><locale_1033>RUTShowAllLayers</locale_1033></tooltip>
+        <help_text><locale_1033>RUTShowAllLayers</locale_1033></help_text>
+        <button_text><locale_1033>RUTShowAllLayers</locale_1033></button_text>
+        <menu_text><locale_1033>RUTShowAllLayers</locale_1033></menu_text>
+        <script>! _RUTShowAllLayers</script>
+      </macro_item>      <macro_item guid="bbda5618-e40b-5194-82c3-4d058d1d49ed" bitmap_id="bbda5618-e40b-5194-82c3-4d058d1d49ed">
+        <text><locale_1033>Macro.RUTUnlockAllLayers</locale_1033></text>
+        <tooltip><locale_1033>RUTUnlockAllLayers</locale_1033></tooltip>
+        <help_text><locale_1033>RUTUnlockAllLayers</locale_1033></help_text>
+        <button_text><locale_1033>RUTUnlockAllLayers</locale_1033></button_text>
+        <menu_text><locale_1033>RUTUnlockAllLayers</locale_1033></menu_text>
+        <script>! _RUTUnlockAllLayers</script>
+      </macro_item>      <macro_item guid="d6543cdf-d915-528b-9ecb-fc8fe7d19de7" bitmap_id="d6543cdf-d915-528b-9ecb-fc8fe7d19de7">
+        <text><locale_1033>Macro.RUTShowAndUnlockAllLayers</locale_1033></text>
+        <tooltip><locale_1033>RUTShowAndUnlockAllLayers</locale_1033></tooltip>
+        <help_text><locale_1033>RUTShowAndUnlockAllLayers</locale_1033></help_text>
+        <button_text><locale_1033>RUTShowAndUnlockAllLayers</locale_1033></button_text>
+        <menu_text><locale_1033>RUTShowAndUnlockAllLayers</locale_1033></menu_text>
+        <script>! _RUTShowAndUnlockAllLayers</script>
+      </macro_item>      <macro_item guid="0740432c-66f7-561f-8dcc-3312e32a8ef3" bitmap_id="0740432c-66f7-561f-8dcc-3312e32a8ef3">
+        <text><locale_1033>Macro.RUTToggleLayerExpansion</locale_1033></text>
+        <tooltip><locale_1033>RUTToggleLayerExpansion</locale_1033></tooltip>
+        <help_text><locale_1033>RUTToggleLayerExpansion</locale_1033></help_text>
+        <button_text><locale_1033>RUTToggleLayerExpansion</locale_1033></button_text>
+        <menu_text><locale_1033>RUTToggleLayerExpansion</locale_1033></menu_text>
+        <script>! _RUTToggleLayerExpansion</script>
+      </macro_item>      <macro_item guid="5cfbc816-f99c-5136-8e85-0d9487df8a18" bitmap_id="5cfbc816-f99c-5136-8e85-0d9487df8a18">
+        <text><locale_1033>Macro.RUTCreateBlockVersion</locale_1033></text>
+        <tooltip><locale_1033>RUTCreateBlockVersion</locale_1033></tooltip>
+        <help_text><locale_1033>RUTCreateBlockVersion</locale_1033></help_text>
+        <button_text><locale_1033>RUTCreateBlockVersion</locale_1033></button_text>
+        <menu_text><locale_1033>RUTCreateBlockVersion</locale_1033></menu_text>
+        <script>! _RUTCreateBlockVersion</script>
+      </macro_item>      <macro_item guid="8aee8bd6-4da7-5571-9662-77fd1af7acc1" bitmap_id="8aee8bd6-4da7-5571-9662-77fd1af7acc1">
+        <text><locale_1033>Macro.RUTConsolidateBlockVersions</locale_1033></text>
+        <tooltip><locale_1033>RUTConsolidateBlockVersions</locale_1033></tooltip>
+        <help_text><locale_1033>RUTConsolidateBlockVersions</locale_1033></help_text>
+        <button_text><locale_1033>RUTConsolidateBlockVersions</locale_1033></button_text>
+        <menu_text><locale_1033>RUTConsolidateBlockVersions</locale_1033></menu_text>
+        <script>! _RUTConsolidateBlockVersions</script>
+      </macro_item>      <macro_item guid="65925b07-227a-5f33-a193-ae21e8b7a3ea" bitmap_id="65925b07-227a-5f33-a193-ae21e8b7a3ea">
+        <text><locale_1033>Macro.RUTRenameBlockFamily</locale_1033></text>
+        <tooltip><locale_1033>RUTRenameBlockFamily</locale_1033></tooltip>
+        <help_text><locale_1033>RUTRenameBlockFamily</locale_1033></help_text>
+        <button_text><locale_1033>RUTRenameBlockFamily</locale_1033></button_text>
+        <menu_text><locale_1033>RUTRenameBlockFamily</locale_1033></menu_text>
+        <script>! _RUTRenameBlockFamily</script>
+      </macro_item>      <macro_item guid="9015fe19-d7de-57eb-806e-64fc6f0dec5e" bitmap_id="9015fe19-d7de-57eb-806e-64fc6f0dec5e">
+        <text><locale_1033>Macro.RUTAssignBlockLayer</locale_1033></text>
+        <tooltip><locale_1033>RUTAssignBlockLayer</locale_1033></tooltip>
+        <help_text><locale_1033>RUTAssignBlockLayer</locale_1033></help_text>
+        <button_text><locale_1033>RUTAssignBlockLayer</locale_1033></button_text>
+        <menu_text><locale_1033>RUTAssignBlockLayer</locale_1033></menu_text>
+        <script>! _RUTAssignBlockLayer</script>
+      </macro_item>      <macro_item guid="5ee8fcb4-f61e-5e99-b37a-172f3d905c85" bitmap_id="5ee8fcb4-f61e-5e99-b37a-172f3d905c85">
+        <text><locale_1033>Macro.RUTApplyBlockLayers</locale_1033></text>
+        <tooltip><locale_1033>RUTApplyBlockLayers</locale_1033></tooltip>
+        <help_text><locale_1033>RUTApplyBlockLayers</locale_1033></help_text>
+        <button_text><locale_1033>RUTApplyBlockLayers</locale_1033></button_text>
+        <menu_text><locale_1033>RUTApplyBlockLayers</locale_1033></menu_text>
+        <script>! _RUTApplyBlockLayers</script>
+      </macro_item>      <macro_item guid="c35f1308-78a7-5e65-8997-8e72e2aafded" bitmap_id="c35f1308-78a7-5e65-8997-8e72e2aafded">
+        <text><locale_1033>Macro.RUTShowBlockLayers</locale_1033></text>
+        <tooltip><locale_1033>RUTShowBlockLayers</locale_1033></tooltip>
+        <help_text><locale_1033>RUTShowBlockLayers</locale_1033></help_text>
+        <button_text><locale_1033>RUTShowBlockLayers</locale_1033></button_text>
+        <menu_text><locale_1033>RUTShowBlockLayers</locale_1033></menu_text>
+        <script>! _RUTShowBlockLayers</script>
+      </macro_item>      <macro_item guid="f6093092-ab08-552b-a993-be3af5c11c93" bitmap_id="f6093092-ab08-552b-a993-be3af5c11c93">
+        <text><locale_1033>Macro.RUTQuickFloorArea</locale_1033></text>
+        <tooltip><locale_1033>RUTQuickFloorArea</locale_1033></tooltip>
+        <help_text><locale_1033>RUTQuickFloorArea</locale_1033></help_text>
+        <button_text><locale_1033>RUTQuickFloorArea</locale_1033></button_text>
+        <menu_text><locale_1033>RUTQuickFloorArea</locale_1033></menu_text>
+        <script>! _RUTQuickFloorArea</script>
+      </macro_item>      <macro_item guid="70785acc-809f-5f1a-88f7-990ede4c053f" bitmap_id="70785acc-809f-5f1a-88f7-990ede4c053f">
+        <text><locale_1033>Macro.RUTFloorArea</locale_1033></text>
+        <tooltip><locale_1033>RUTFloorArea</locale_1033></tooltip>
+        <help_text><locale_1033>RUTFloorArea</locale_1033></help_text>
+        <button_text><locale_1033>RUTFloorArea</locale_1033></button_text>
+        <menu_text><locale_1033>RUTFloorArea</locale_1033></menu_text>
+        <script>! _RUTFloorArea</script>
+      </macro_item>      <macro_item guid="8135732e-fb98-50cb-ae52-cb9ca20b6409" bitmap_id="8135732e-fb98-50cb-ae52-cb9ca20b6409">
+        <text><locale_1033>Macro.RUTPushPullCurve</locale_1033></text>
+        <tooltip><locale_1033>RUTPushPullCurve</locale_1033></tooltip>
+        <help_text><locale_1033>RUTPushPullCurve</locale_1033></help_text>
+        <button_text><locale_1033>RUTPushPullCurve</locale_1033></button_text>
+        <menu_text><locale_1033>RUTPushPullCurve</locale_1033></menu_text>
+        <script>! _RUTPushPullCurve</script>
+      </macro_item>      <macro_item guid="122c8f4b-f7ef-5145-ba20-2b5ee762b22f" bitmap_id="122c8f4b-f7ef-5145-ba20-2b5ee762b22f">
+        <text><locale_1033>Macro.RUTShapeBuilder</locale_1033></text>
+        <tooltip><locale_1033>RUTShapeBuilder</locale_1033></tooltip>
+        <help_text><locale_1033>RUTShapeBuilder</locale_1033></help_text>
+        <button_text><locale_1033>RUTShapeBuilder</locale_1033></button_text>
+        <menu_text><locale_1033>RUTShapeBuilder</locale_1033></menu_text>
+        <script>! _RUTShapeBuilder</script>
+      </macro_item>
+  </macros>
+  <icons>
+      <icon guid="6ac6211b-d98c-47f5-95c0-5a542d379a2c">
+        <light><svg width="48" height="48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0pt 0pt 48pt 48pt" fill-dark="#FFF" stroke-dark="none">
+  <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1048.53 777.87">
+    <g id="Layer_3" data-name="Layer 3" xmlns="http://www.w3.org/2000/svg">
+      <g>
+        <path d="M302.77,498.01c6.13,6.23,11.31,11.94,15.35,16.79,14.97,17.96,28.66,42.26,39.79,62.18l16.6-76.59-68.97-15.16-2.77,12.77Z" />
+        <polygon points="309.99 464.7 378.96 479.86 395.67 402.72 326.71 387.56 309.99 464.7" />
+        <polygon points="331.16 367.03 400.12 382.19 418.7 296.47 349.74 281.31 331.16 367.03" />
+        <polygon points="226.11 343.94 310.64 362.52 329.22 276.8 244.69 258.23 226.11 343.94" />
+        <polygon points="399.47 484.37 485.06 503.18 501.78 426.04 416.19 407.23 399.47 484.37" />
+        <path d="M500.95,646.22c15.22,8.91,31.61,19.26,48.53,31.09l4.22-19.49-52.76-11.59Z" />
+        <polygon points="690.55 569.85 598.64 549.65 578.67 641.79 670.58 661.99 690.55 569.85" />
+        <polygon points="420.64 386.7 506.23 405.5 524.81 319.79 439.22 300.98 420.64 386.7" />
+        <polygon points="711.72 472.17 619.81 451.97 603.09 529.12 695 549.32 711.72 472.17" />
+        <path d="M208.35,425.87c13.94,7.57,27.32,16.22,39.77,25.24l41.35,9.09,16.72-77.14-84.53-18.58-13.31,61.39Z" />
+        <path d="M284.57,480.63c.13.12.27.24.4.36l.06-.26-.46-.1Z" />
+        <path d="M480.61,523.71l-85.59-18.81-19.97,92.14,31.81,6.99c2.46-.24,5.17-.03,8.21.86,1.91.56,4.5,1.45,7.65,2.63l37.92,8.33,19.97-92.14Z" />
+        <path d="M548.69,209.61l4.97-22.91c-11.94-24.8-30.58-52.4-49.24-75.46l-22.98-5.05-18.34,84.62,85.59,18.81Z" />
+        <path d="M122.43,209.85l14.98-69.12-71.28-15.66c-.55,1.28-1.1,2.55-1.66,3.87-6.87,16.21-14.44,38.71-21.88,63.37l79.84,17.55Z" />
+        <polygon points="558.15 637.28 578.12 545.14 501.13 528.22 481.16 620.36 558.15 637.28" />
+        <path d="M81.25,399.89l13.71-63.26-85.45-18.78c-3.84,16.77-6.57,30.04-7.71,37.31-2.95,18.95-2.09,32.81,1.25,42.09l37.57,8.26c6.61-2.4,16.43-4.57,40.63-5.61Z" />
+        <path d="M1032.05,362.02c-5.55,5.55-24.31,20.22-47.28,37.35l47.56,10.45c4.79-6.64,8.43-11.99,10.49-15.48,12.73-21.55,1.96-45.05-10.77-32.32Z" />
+        <path d="M141.86,120.2l18.34-84.62-1-.22c-3.26.85-6.45,1.69-9.52,2.49-35.04,9.18-54.45,26.9-74.56,67.67l66.75,14.67Z" />
+        <path d="M508.53,494.06c5.89,1.67,12.48,5.18,17.58,9.43,5.18,4.31,9,7.71,11.51,11.24l44.95,9.88,16.72-77.14-76.99-16.92-13.77,63.52Z" />
+        <path d="M526.75,410.01l76.99,16.92,12.92-59.63c-4.07-10.79-7.46-21.19-10.8-29.71l-60.54-13.3-18.58,85.72Z" />
+        <path d="M568.06,690.75c.58.44,1.16.86,1.75,1.3,33.5,25.24,59.9,48.76,79.81,66.63l16.51-76.16-91.91-20.2-6.16,28.43Z" />
+        <path d="M716.17,451.64l3.7-17.07c-10.63,1.27-23.74,1.1-41.35-1.06-22.03-2.7-36.62-16.96-47.2-34.63l-7.06,32.56,91.91,20.2Z" />
+        <path d="M962.45,415.97l-18.58,85.72,12.24,2.69c21.33-24.02,44.95-53.18,62.45-76.08l-56.11-12.33Z" />
+        <path d="M702.02,765.5c-.98-8.81,5.88-9.79,13.71-2.94,7.83,6.86,23.5,2.94,44.07-11.75.04-.03.09-.07.13-.1l9.84-45.42-83.13-18.27-18.05,83.28,34.42,7.56c.02-4.43-.63-9.03-1-12.37Z" />
+        <path d="M835.88,499.46l-16.72,77.14,48.07,10.56c14.47-12.43,30.43-26.15,45.08-39.01l6.6-30.45-83.03-18.25Z" />
+        <path d="M102.86,399.33c4.77-.06,9.91-.09,15.47-.09,23.42,0,47.5,6.68,70.61,17.02l12.2-56.28-85.67-18.83-12.61,58.19Z" />
+        <polygon points="119.92 320.61 205.59 339.43 224.17 253.72 138.5 234.89 119.92 320.61" />
+        <path d="M893.97,463.87c-9.81,6.47-20.49,13.29-31.51,19.92l60.9,13.38,13.66-63.02c-15.83,11.26-30.98,21.76-43.05,29.71Z" />
+        <polygon points="142.95 214.36 228.62 233.19 243.6 164.07 157.93 145.24 142.95 214.36" />
+        <path d="M99.41,316.1l18.58-85.72-81.33-17.87c-8.3,28.94-16.14,59.24-22.34,84.89l85.09,18.7Z" />
+        <path d="M939.43,522.21l-.1.45c.12-.13.25-.26.37-.39l-.27-.06Z" />
+        <path d="M396.4,65.99l68.97,15.16,2.01-9.27c-22.84-20-42.31-33.85-62.86-43.33l-8.11,37.44Z" />
+        <path d="M278.32,3.84c-19.55,5.3-47.12,12.6-74.53,19.82l67.04,14.73,7.49-34.55Z" />
+        <polygon points="794.19 592.62 711.06 574.36 691.09 666.5 774.22 684.77 794.19 592.62" />
+        <path d="M375.89,61.48l8.8-40.62c-2.89-.92-5.8-1.8-8.79-2.59C348.86,11.12,325.7-.56,300.65.02l-9.29,42.88,84.53,18.58Z" />
+        <path d="M768.02,463.04c6.36-9.37,13.17-19.35,20.18-28.55,15.67-20.57-3.92-29.38-25.46-16.65-6.96,4.11-13.2,7.81-20.08,10.74l-5.98,27.57,31.34,6.89Z" />
+        <path d="M549.78,303.77l46.15,10.14c-10-23.37-21.13-49.91-27.43-78.44l-3.74-.82-14.98,69.12Z" />
+        <path d="M758.82,523.61c-32.32-3.92-22.52-18.61-11.75-31.34,2.49-2.95,5.2-6.54,8.08-10.55l-22.91-5.04-16.72,77.14,83.13,18.27,13.31-61.39c-20.43,9.07-39.29,14.58-53.13,12.91Z" />
+        <polygon points="443.67 280.45 529.26 299.26 544.24 230.14 458.65 211.33 443.67 280.45" />
+        <path d="M824.43,624.48c4.71-4.39,12.85-11.51,22.88-20.18l-32.61-7.17-10.83,49.97c5.71-8.24,13-15.57,20.56-22.62Z" />
+        <polygon points="354.19 260.78 423.15 275.94 438.13 206.82 369.16 191.66 354.19 260.78" />
+        <polygon points="249.14 237.7 333.67 256.27 348.65 187.16 264.11 168.58 249.14 237.7" />
+        <polygon points="268.56 148.05 353.1 166.62 371.44 82.01 286.9 63.43 268.56 148.05" />
+        <polygon points="373.61 171.13 442.58 186.29 460.92 101.67 391.95 86.52 373.61 171.13" />
+        <polygon points="162.38 124.71 248.05 143.54 266.39 58.92 180.72 40.09 162.38 124.71" />
+      </g>
+    </g>
+  </svg>
+</svg></light>
+        <dark></dark>
+      </icon>
+
+      <icon guid="d05193ae-7a75-5852-8c39-9df7318ac2b4">
+        <light><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTIsolateLayer</title><g transform="translate(1 1)"><path d="M3 13 10 16.5 17 13 M3 17 10 20.5 17 17" fill="none" stroke="#526d76" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 9 10 5.5 17 9 10 12.5Z" fill="#e2f1ed" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 4V2H6 M18 2H22V6 M22 17V22H18 M6 22H2V19" fill="none" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</light>
+        <dark><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTIsolateLayer</title><g transform="translate(1 1)"><path d="M3 13 10 16.5 17 13 M3 17 10 20.5 17 17" fill="none" stroke="#b9d0d5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 9 10 5.5 17 9 10 12.5Z" fill="#294944" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 4V2H6 M18 2H22V6 M22 17V22H18 M6 22H2V19" fill="none" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</dark>
+      </icon>
+
+      <icon guid="91a2ffdc-ea86-5402-a357-e737d0443bd2">
+        <light><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTUnisolateLayer</title><g transform="translate(1 1)"><path d="M3 13 10 16.5 17 13 M3 17 10 20.5 17 17" fill="none" stroke="#526d76" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 9 10 5.5 17 9 10 12.5Z" fill="#e2f1ed" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 4H21V7 M21 4C15 2 13 5 13 8" fill="none" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</light>
+        <dark><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTUnisolateLayer</title><g transform="translate(1 1)"><path d="M3 13 10 16.5 17 13 M3 17 10 20.5 17 17" fill="none" stroke="#b9d0d5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 9 10 5.5 17 9 10 12.5Z" fill="#294944" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 4H21V7 M21 4C15 2 13 5 13 8" fill="none" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</dark>
+      </icon>
+
+      <icon guid="e686cf9c-480d-5636-b9d8-e1024d6081d3">
+        <light><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTIsolateLockLayer</title><g transform="translate(1 1)"><path d="M3 13 10 16.5 17 13 M3 17 10 20.5 17 17" fill="none" stroke="#526d76" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 9 10 5.5 17 9 10 12.5Z" fill="#e2f1ed" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 14H22V21H14Z" fill="#e2f1ed" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 14V11.5C16 8 20 8 20 11.5V14" fill="none" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</light>
+        <dark><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTIsolateLockLayer</title><g transform="translate(1 1)"><path d="M3 13 10 16.5 17 13 M3 17 10 20.5 17 17" fill="none" stroke="#b9d0d5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 9 10 5.5 17 9 10 12.5Z" fill="#294944" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 14H22V21H14Z" fill="#294944" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 14V11.5C16 8 20 8 20 11.5V14" fill="none" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</dark>
+      </icon>
+
+      <icon guid="dcaa672e-1654-5539-bd06-6f7b28d48649">
+        <light><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTUnisolateLockLayer</title><g transform="translate(1 1)"><path d="M14 14H22V21H14Z" fill="#e2f1ed" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 14V11.5C16 8 21 8 21 11" fill="none" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 9H10V16 M10 9C2 8 1 17 7 21" fill="none" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</light>
+        <dark><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTUnisolateLockLayer</title><g transform="translate(1 1)"><path d="M14 14H22V21H14Z" fill="#294944" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 14V11.5C16 8 21 8 21 11" fill="none" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 9H10V16 M10 9C2 8 1 17 7 21" fill="none" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</dark>
+      </icon>
+
+      <icon guid="3a6c3996-bf1c-5595-bc37-6463de905fd8">
+        <light><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTShowAllLayers</title><g transform="translate(1 1)"><path d="M3 13 10 16.5 17 13 M3 17 10 20.5 17 17" fill="none" stroke="#526d76" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 9 10 5.5 17 9 10 12.5Z" fill="#e2f1ed" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 8Q17 2 22 8Q17 14 12 8Z" fill="#e2f1ed" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="17" cy="8" r="1.4" fill="none" stroke="#246e7b" stroke-width="1.6"/></g></svg>
+</light>
+        <dark><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTShowAllLayers</title><g transform="translate(1 1)"><path d="M3 13 10 16.5 17 13 M3 17 10 20.5 17 17" fill="none" stroke="#b9d0d5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 9 10 5.5 17 9 10 12.5Z" fill="#294944" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 8Q17 2 22 8Q17 14 12 8Z" fill="#294944" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="17" cy="8" r="1.4" fill="none" stroke="#b1e4df" stroke-width="1.6"/></g></svg>
+</dark>
+      </icon>
+
+      <icon guid="bbda5618-e40b-5194-82c3-4d058d1d49ed">
+        <light><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTUnlockAllLayers</title><g transform="translate(1 1)"><path d="M3 13 10 16.5 17 13 M3 17 10 20.5 17 17" fill="none" stroke="#526d76" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 9 10 5.5 17 9 10 12.5Z" fill="#e2f1ed" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 14H22V21H14Z" fill="#e2f1ed" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 14V11.5C16 8 21 8 21 11" fill="none" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</light>
+        <dark><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTUnlockAllLayers</title><g transform="translate(1 1)"><path d="M3 13 10 16.5 17 13 M3 17 10 20.5 17 17" fill="none" stroke="#b9d0d5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 9 10 5.5 17 9 10 12.5Z" fill="#294944" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 14H22V21H14Z" fill="#294944" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 14V11.5C16 8 21 8 21 11" fill="none" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</dark>
+      </icon>
+
+      <icon guid="d6543cdf-d915-528b-9ecb-fc8fe7d19de7">
+        <light><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTShowAndUnlockAllLayers</title><g transform="translate(1 1)"><path d="M2 8 7 5 12 8 7 11Z M2 13 7 16 11 14 M2 18 7 21 11 19" fill="none" stroke="#263f4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 8Q17 2 22 8Q17 14 12 8Z" fill="#e2f1ed" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="17" cy="8" r="1.4" fill="none" stroke="#246e7b" stroke-width="1.6"/><path d="M14 14H22V21H14Z" fill="#e2f1ed" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 14V11.5C16 8 21 8 21 11" fill="none" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</light>
+        <dark><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTShowAndUnlockAllLayers</title><g transform="translate(1 1)"><path d="M2 8 7 5 12 8 7 11Z M2 13 7 16 11 14 M2 18 7 21 11 19" fill="none" stroke="#e9f5f6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 8Q17 2 22 8Q17 14 12 8Z" fill="#294944" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="17" cy="8" r="1.4" fill="none" stroke="#b1e4df" stroke-width="1.6"/><path d="M14 14H22V21H14Z" fill="#294944" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 14V11.5C16 8 21 8 21 11" fill="none" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</dark>
+      </icon>
+
+      <icon guid="0740432c-66f7-561f-8dcc-3312e32a8ef3">
+        <light><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTToggleLayerExpansion</title><g transform="translate(1 1)"><path d="M4 3V18H9 M4 9H9" fill="none" stroke="#526d76" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 6H17V11H10Z" fill="#e2f1ed" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 15H17V20H10Z" fill="#e2f1ed" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 4 22 2 24 4 M20 20 22 22 24 20" fill="none" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</light>
+        <dark><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTToggleLayerExpansion</title><g transform="translate(1 1)"><path d="M4 3V18H9 M4 9H9" fill="none" stroke="#b9d0d5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 6H17V11H10Z" fill="#294944" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 15H17V20H10Z" fill="#294944" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 4 22 2 24 4 M20 20 22 22 24 20" fill="none" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</dark>
+      </icon>
+
+      <icon guid="5cfbc816-f99c-5136-8e85-0d9487df8a18">
+        <light><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTCreateBlockVersion</title><g transform="translate(1 1)"><path d="M3 7 9 3.5 15 7 15 14 9 17.5 3 14Z" fill="#e2f1ed" stroke="#263f4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 7 9 10.5 15 7 M9 10.5V17.5" fill="none" stroke="#263f4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 14V22 M14 18H22" fill="none" stroke="#246e7b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</light>
+        <dark><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTCreateBlockVersion</title><g transform="translate(1 1)"><path d="M3 7 9 3.5 15 7 15 14 9 17.5 3 14Z" fill="#294944" stroke="#e9f5f6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 7 9 10.5 15 7 M9 10.5V17.5" fill="none" stroke="#e9f5f6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 14V22 M14 18H22" fill="none" stroke="#b1e4df" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</dark>
+      </icon>
+
+      <icon guid="8aee8bd6-4da7-5571-9662-77fd1af7acc1">
+        <light><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTConsolidateBlockVersions</title><g transform="translate(1 1)"><path d="M3 7 9 3.5 15 7 15 14 9 17.5 3 14Z" fill="#e2f1ed" stroke="#263f4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 7 9 10.5 15 7 M9 10.5V17.5" fill="none" stroke="#263f4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 5H22 M18 10H22 M18 15H22 M17 20H22 M18 18 16 20 18 22" fill="none" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</light>
+        <dark><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTConsolidateBlockVersions</title><g transform="translate(1 1)"><path d="M3 7 9 3.5 15 7 15 14 9 17.5 3 14Z" fill="#294944" stroke="#e9f5f6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 7 9 10.5 15 7 M9 10.5V17.5" fill="none" stroke="#e9f5f6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 5H22 M18 10H22 M18 15H22 M17 20H22 M18 18 16 20 18 22" fill="none" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</dark>
+      </icon>
+
+      <icon guid="65925b07-227a-5f33-a193-ae21e8b7a3ea">
+        <light><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTRenameBlockFamily</title><g transform="translate(1 1)"><path d="M3 7 9 3.5 15 7 15 14 9 17.5 3 14Z" fill="#e2f1ed" stroke="#263f4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 7 9 10.5 15 7 M9 10.5V17.5" fill="none" stroke="#263f4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 19 19 13 22 16 16 22 12 23Z" fill="#e2f1ed" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 14 21 17" fill="none" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</light>
+        <dark><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTRenameBlockFamily</title><g transform="translate(1 1)"><path d="M3 7 9 3.5 15 7 15 14 9 17.5 3 14Z" fill="#294944" stroke="#e9f5f6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 7 9 10.5 15 7 M9 10.5V17.5" fill="none" stroke="#e9f5f6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 19 19 13 22 16 16 22 12 23Z" fill="#294944" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 14 21 17" fill="none" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</dark>
+      </icon>
+
+      <icon guid="9015fe19-d7de-57eb-806e-64fc6f0dec5e">
+        <light><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTAssignBlockLayer</title><g transform="translate(1 1)"><path d="M3 7 9 3.5 15 7 15 14 9 17.5 3 14Z" fill="#e2f1ed" stroke="#263f4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 7 9 10.5 15 7 M9 10.5V17.5" fill="none" stroke="#263f4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 18 18 15 23 18 18 21Z" fill="#e2f1ed" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 3V11 M17 8 20 11 23 8" fill="none" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</light>
+        <dark><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTAssignBlockLayer</title><g transform="translate(1 1)"><path d="M3 7 9 3.5 15 7 15 14 9 17.5 3 14Z" fill="#294944" stroke="#e9f5f6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 7 9 10.5 15 7 M9 10.5V17.5" fill="none" stroke="#e9f5f6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 18 18 15 23 18 18 21Z" fill="#294944" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 3V11 M17 8 20 11 23 8" fill="none" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</dark>
+      </icon>
+
+      <icon guid="5ee8fcb4-f61e-5e99-b37a-172f3d905c85">
+        <light><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTApplyBlockLayers</title><g transform="translate(1 1)"><path d="M3 7 9 3.5 15 7 15 14 9 17.5 3 14Z" fill="#e2f1ed" stroke="#263f4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 7 9 10.5 15 7 M9 10.5V17.5" fill="none" stroke="#263f4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 18 18 15 23 18 18 21Z" fill="#e2f1ed" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 6 19 8 23 3" fill="none" stroke="#246e7b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</light>
+        <dark><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTApplyBlockLayers</title><g transform="translate(1 1)"><path d="M3 7 9 3.5 15 7 15 14 9 17.5 3 14Z" fill="#294944" stroke="#e9f5f6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 7 9 10.5 15 7 M9 10.5V17.5" fill="none" stroke="#e9f5f6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 18 18 15 23 18 18 21Z" fill="#294944" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 6 19 8 23 3" fill="none" stroke="#b1e4df" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</dark>
+      </icon>
+
+      <icon guid="c35f1308-78a7-5e65-8997-8e72e2aafded">
+        <light><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTShowBlockLayers</title><g transform="translate(1 1)"><path d="M3 7 9 3.5 15 7 15 14 9 17.5 3 14Z" fill="#e2f1ed" stroke="#263f4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 7 9 10.5 15 7 M9 10.5V17.5" fill="none" stroke="#263f4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="17" r="3.5" fill="none" stroke="#246e7b" stroke-width="1.6"/><path d="M20.5 19.5 23 22" fill="none" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</light>
+        <dark><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTShowBlockLayers</title><g transform="translate(1 1)"><path d="M3 7 9 3.5 15 7 15 14 9 17.5 3 14Z" fill="#294944" stroke="#e9f5f6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 7 9 10.5 15 7 M9 10.5V17.5" fill="none" stroke="#e9f5f6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="17" r="3.5" fill="none" stroke="#b1e4df" stroke-width="1.6"/><path d="M20.5 19.5 23 22" fill="none" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</dark>
+      </icon>
+
+      <icon guid="f6093092-ab08-552b-a993-be3af5c11c93">
+        <light><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTQuickFloorArea</title><g transform="translate(1 1)"><path d="M2 10 12 5 20 9 10 14Z" fill="#e2f1ed" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 10 12 7 M9 12 16 8" fill="none" stroke="#246e7b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 13H22V22H14Z" fill="#e2f1ed" stroke="#263f4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 13V11H20V13 M16 17H20 M16 19.5H19" fill="none" stroke="#263f4b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</light>
+        <dark><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTQuickFloorArea</title><g transform="translate(1 1)"><path d="M2 10 12 5 20 9 10 14Z" fill="#294944" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 10 12 7 M9 12 16 8" fill="none" stroke="#b1e4df" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 13H22V22H14Z" fill="#294944" stroke="#e9f5f6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 13V11H20V13 M16 17H20 M16 19.5H19" fill="none" stroke="#e9f5f6" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</dark>
+      </icon>
+
+      <icon guid="70785acc-809f-5f1a-88f7-990ede4c053f">
+        <light><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTFloorArea</title><g transform="translate(1 1)"><path d="M3 8 10 4 17 8 17 18 10 22 3 18Z" fill="#e2f1ed" stroke="#263f4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 8 10 12 17 8 M10 12V22" fill="none" stroke="#526d76" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 13 10 9 18 13 10 17Z" fill="#e2f1ed" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 5V21 M20 5H23 M20 13H23 M20 21H23" fill="none" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</light>
+        <dark><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTFloorArea</title><g transform="translate(1 1)"><path d="M3 8 10 4 17 8 17 18 10 22 3 18Z" fill="#294944" stroke="#e9f5f6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 8 10 12 17 8 M10 12V22" fill="none" stroke="#b9d0d5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 13 10 9 18 13 10 17Z" fill="#294944" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 5V21 M20 5H23 M20 13H23 M20 21H23" fill="none" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</dark>
+      </icon>
+
+      <icon guid="8135732e-fb98-50cb-ae52-cb9ca20b6409">
+        <light><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTPushPullCurve</title><g transform="translate(1 1)"><path d="M3 4V21H21 M3 4H11V10" fill="none" stroke="#263f4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 4V16 M11 10H22 M19 7 22 10 19 13" fill="none" stroke="#246e7b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 16H15" fill="none" stroke="#526d76" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</light>
+        <dark><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTPushPullCurve</title><g transform="translate(1 1)"><path d="M3 4V21H21 M3 4H11V10" fill="none" stroke="#e9f5f6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 4V16 M11 10H22 M19 7 22 10 19 13" fill="none" stroke="#b1e4df" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 16H15" fill="none" stroke="#b9d0d5" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</dark>
+      </icon>
+
+      <icon guid="122c8f4b-f7ef-5145-ba20-2b5ee762b22f">
+        <light><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTShapeBuilder</title><g transform="translate(1 1)"><path d="M3 4H13V9H21V21H9V16H3Z" fill="#e2f1ed" stroke="#246e7b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 7 9 11 M9 7 13 11 M12 14 17 19 M16 13 19 16" fill="none" stroke="#246e7b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</light>
+        <dark><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26"><title>RUTShapeBuilder</title><g transform="translate(1 1)"><path d="M3 4H13V9H21V21H9V16H3Z" fill="#294944" stroke="#b1e4df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 7 9 11 M9 7 13 11 M12 14 17 19 M16 13 19 16" fill="none" stroke="#b1e4df" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+</dark>
+      </icon>
+  </icons>
+  <bitmaps />
+</RhinoUI>

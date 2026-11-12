@@ -1,8 +1,28 @@
 # Push/pull straight curve section
 
+The viewport panel uses the heading `RUT | Push/pull` and sits 32 screen pixels
+from the left edge and 48 from the top, leaving space below the viewport title
+dropdown. Keep `viewport_ui.py` alongside the script; it shares panel spacing
+and font sizes with QuickArea.
+
 Run `PushPullCurve.py`, click a straight section, then click its new position
 or type a distance. Typed distances show a preview; press Enter to apply.
-Escape cancels. The curve stays in its original plane.
+Escape cancels. Planar curves stay in their original plane. For a non-planar
+curve, choose **Project** to work on a projection onto the active viewport's
+CPlane, or **Cancel** to leave it unchanged. Projection is perpendicular to
+that CPlane and is only committed when you apply a valid push/pull movement.
+
+While choosing or reviewing the distance, choose **SplitSegment**:
+
+1. Pick a split point inside the selected segment, away from its ends.
+2. Hover over either half to highlight it, then click once to select it.
+3. Push/pull that half as usual. The other half stays fixed at the split, with
+   a perpendicular connecting segment joining it to the moved half.
+
+You can split the selected half again before applying the movement. Splitting
+resets any typed distance. Escape at either split prompt cancels the entire
+command. Projection, splits, and movement form one edit for Undo; no intermediate
+curves are added.
 
 - **Extrude=No** (default): extend or trim angled neighbours. A collinear
   neighbour stays fixed, with a new perpendicular connecting segment at the
@@ -12,6 +32,8 @@ Escape cancels. The curve stays in its original plane.
   selection or while picking/reviewing the distance. An existing perpendicular
   neighbour already serves as a connection, so redundant vertices are omitted.
 - **Replace=Yes/No**: replace the original curve, or keep it and create a copy.
+  With projection, **Replace=No** keeps the original non-planar curve and adds
+  the edited planar result.
 - **AllowCollapse=Yes/No**: allow segments to disappear when trimming past
   vertices. Removed original edges appear in coral with a removal count.
   Adding connecting edges does not require AllowCollapse.

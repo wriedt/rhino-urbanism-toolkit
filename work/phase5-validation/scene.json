@@ -1,0 +1,101 @@
+{
+  "path": "C:\\Projects\\rhino-urbanism-toolkit\\work\\phase5-validation\\RUT-beta-hands-on.3dm",
+  "user_checks": "Pending; no manual checks marked passed",
+  "created": true,
+  "units": "metres",
+  "objects": 45,
+  "definitions": 5,
+  "checks": [
+    {
+      "name": "Tall base",
+      "passed": true,
+      "base": 80.0,
+      "section": 0.0,
+      "issues": 0
+    },
+    {
+      "name": "Tall section",
+      "passed": true,
+      "base": 80.0,
+      "section": 80.0,
+      "issues": 0
+    },
+    {
+      "name": "Short base",
+      "passed": true,
+      "base": 32.000000000000014,
+      "section": 0.0,
+      "issues": 0
+    },
+    {
+      "name": "Short section warns",
+      "passed": true,
+      "base": 0.0,
+      "section": 0.0,
+      "issues": 1
+    },
+    {
+      "name": "Open surface warns",
+      "passed": true,
+      "base": 0.0,
+      "section": 0.0,
+      "issues": 1
+    },
+    {
+      "name": "Nested block",
+      "passed": true,
+      "base": 30.0,
+      "section": 30.0,
+      "issues": 0
+    }
+  ],
+  "candidate": "0.1.0-beta+20137",
+  "objects_by_name": {
+    "Layer parent": "a4e9429d-4349-4266-8c03-a6fe73fc72b0",
+    "Layer child": "c6ba4de8-995d-4bb4-b53b-bad2aac70b50",
+    "Hidden square": "f89ce533-013f-4cee-9411-cc84e5fff044",
+    "Locked square": "8a1046ff-30cb-44fc-b323-9dfed278c985",
+    "Root zero stays available": "3370747f-aafe-4643-a955-c6c8f53df01b",
+    "1  LAYERS": "c7062b80-a006-4fcf-8adf-9a23babd04a1",
+    "BetaHouse_v02 copy at 45": "0384530d-c111-431c-a390-d125738c6089",
+    "BetaHouse_v02 copy at 51": "c68ecc44-7134-441f-addb-f40e143f7dc8",
+    "BetaHouse_v04 copy at 57": "a1bce12d-8255-4133-a057-c7e0d7689248",
+    "2  BLOCKS": "d65f0e82-302e-4972-91a4-17cdb46739de",
+    "Tall 80 m2": "2bdb2b83-cd4e-43e4-a2fa-2e2d29054c13",
+    "Short 32 m2 - height 0.5 m": "ba2a8ab0-996c-4d1a-8be5-b0faa90f2f2f",
+    "Open surface - must warn": "4f3fc6ee-a147-4b81-8b6a-dd1860661390",
+    "Nested block 30 m2": "b4752d3f-1496-4329-9587-07d3fea6c6fd",
+    "3  FLOOR AREA": "6de36132-7bb1-4ef0-b92b-324644c769da",
+    "Push-pull rectangle": "f53a4f71-bee5-4180-a921-df51e10ed9fd",
+    "Mixed straight + semicircle": "ea5e058e-987b-4258-b660-a6a1903b9a3c",
+    "Nonplanar projection example": "f592717e-372c-489c-a97f-bdd12d81b0a9",
+    "4  PUSH / PULL": "205dad20-0b47-4a3b-a727-d9688e79fc28",
+    "ShapeBuilder curve": "623fd187-8458-4987-897f-78374cb1d947",
+    "ShapeBuilder hatch master": "ffd99896-f911-44ca-b258-96f128be60a5",
+    "Open divider with outside tails": "82ea4701-42a1-44a2-a1a5-4976a30dd4e1",
+    "5  SHAPE BUILDER": "8e84e055-1e28-42aa-af69-846287a96501",
+    "Grid vertical 0": "19c8be35-beb4-47d9-b2bb-152d541fde4c",
+    "Grid horizontal 0": "6e450058-85b9-4fb1-ad6d-93c5f1c8d479",
+    "Grid vertical 1": "44560f67-e522-4b65-b4bd-142d2aaa4af0",
+    "Grid horizontal 1": "7663138f-d506-4c12-bea0-ee7bd6fa116d",
+    "Grid vertical 2": "83f60f18-0c91-4a70-96d9-8cd8edb0c6a3",
+    "Grid horizontal 2": "b3eac6e8-adac-488c-a2d5-612079a4e081",
+    "Grid vertical 3": "dc04f690-1289-4fe8-989d-b7064eac452a",
+    "Grid horizontal 3": "a9f28616-b558-4200-936f-23e221453d12",
+    "Grid vertical 4": "0a2948c5-fdf7-42a5-bcf9-10254ab7c5f6",
+    "Grid horizontal 4": "37be23ec-12b1-4c5d-bfa2-c4f3c436e55d",
+    "Grid vertical 5": "5ed4a0a4-f2ef-4700-a403-60289f870d30",
+    "Grid horizontal 5": "6331be04-6165-4378-9838-f0416490d9de",
+    "Grid vertical 6": "ec3e9631-4f33-420d-bfab-c09bf596371c",
+    "Grid horizontal 6": "759cc528-7ad0-46ab-915c-e60fd04b6f48",
+    "Grid vertical 7": "63d56f01-f7b8-4a04-934b-ffd54d0d4b36",
+    "Grid horizontal 7": "79e76e1d-53b2-46d0-94cd-cd1b4c8dcd3f",
+    "Grid vertical 8": "af9e994a-7622-4945-94f5-11deb5685bc3",
+    "Grid horizontal 8": "7aa6cacb-d2ed-454b-ac30-8e49a300a6f6",
+    "Grid vertical 9": "eb1e2bec-cde9-4233-8dd7-293ed1868844",
+    "Grid horizontal 9": "ad26d820-fb72-4a59-88dc-6296ca2fb8e9",
+    "Grid vertical 10": "40970d76-58db-4fb9-bcca-b546d92eb776",
+    "Grid horizontal 10": "5564f818-8891-4056-80e6-c7c2ff2c6370",
+    "6  SHAPE BUILDER - 100 REGIONS": "99a8c661-c84d-48fb-9bd1-b70d69d42ec2"
+  }
+}

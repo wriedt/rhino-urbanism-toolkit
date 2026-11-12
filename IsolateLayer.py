@@ -1,24 +1,19 @@
-# Rune Wriedt 2026-06-18
-
-import rhinoscriptsyntax as rs
-
-
-def isolate_layer():
-    print("test")
-
-# Prompt user to select one or more objects or input the object(s) already selected
-
-# Show a toggle in command line to include potential children in isolation
-
-# Get the layer from the object
-
-# If layer is a sublayer, get the parent layers
-
-# If layer has children, get the children
-
-# Store current visibility state of all layers, so that the isolation can be undone by UnisolateLayer.py
-
-# Turn off all layers that are not the layer(s) of the selected object(s) and the parents, potentially children too
+# -*- coding: utf-8 -*-
+"""Isolate selected objects' layers, including child layers by default."""
+import importlib
+import scriptcontext as sc
+import layer_tools
+importlib.reload(layer_tools)
 
 
-isolate_layer()
+def main(doc=None):
+    doc = doc or sc.doc
+    picked = layer_tools.pick_layers(doc)
+    if picked is None:
+        return
+    ids, children = picked
+    return layer_tools.run_command(lambda: layer_tools.isolate(doc, ids, children))
+
+
+if __name__ == '__main__':
+    main()

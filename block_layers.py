@@ -1,6 +1,6 @@
 #! python 3
 # -*- coding: utf-8 -*-
-"""Shared block-layer assignment and cleanup. Run inside Rhino 8.9+."""
+"""Definition home-layer rules and reviewed instance movements. Rhino 8.9+."""
 import json
 from collections import Counter, deque
 
@@ -75,73 +75,6 @@ def instance_barrier(doc, obj):
     return None
 
 
-def _restore_assignment(sender, event):
-    """Rhino does not record definition user strings automatically for Undo."""
-    definition_id, restore = event.Tag
-    doc = event.Document
-    definition = doc.InstanceDefinitions.FindId(definition_id)
-    if definition is None or definition.IsDeleted:
-        return
-    current = definition.GetUserString(ASSIGNMENT_KEY)
-    doc.AddCustomUndoEvent('Block layer assignment', _restore_assignment,
-                           (definition_id, current))
-    if not definition.SetUserString(ASSIGNMENT_KEY, restore):
-        Rhino.RhinoApp.WriteLine('Could not restore block layer assignment for ' + definition.Name)
-    doc.Modified = True
-
-
-def assign_layer(doc, instance_id, layer_index):
-    """Assign one definition, without moving instances or changing the description."""
-    obj = doc.Objects.FindId(instance_id)
-    if (not isinstance(obj, Rhino.DocObjects.InstanceObject)
-            or obj.IsInstanceDefinitionGeometry or obj.IsDeleted):
-        raise ValueError('Select a top-level block instance.')
-    barrier = instance_barrier(doc, obj)
-    if barrier:
-        raise ValueError('Cannot assign from a ' + barrier + ' instance.')
-    layer = doc.Layers[layer_index] if 0 <= layer_index < doc.Layers.Count else None
-    if layer is None or layer.IsDeleted or layer.IsReference:
-        raise ValueError('Choose an existing local layer.')
-    return bool(save_assignments(doc, {str(obj.InstanceDefinition.Id): str(layer.Id)}))
-
-
-def definition_inventory(doc, definition_ids=None, include_nested=False):
-    """Count used definitions and occurrences, optionally exposing nested rules."""
-    wanted = set(str(i) for i in definition_ids) if definition_ids is not None else None
-    if include_nested:
-        sc.escape_test(False, True)
-        rows, nodes = instance_graph(doc)
-        if wanted is not None:
-            pending = deque(wanted)
-            while pending:
-                key = pending.popleft()
-                for child in nodes.get(key, {}).get('children', []):
-                    child_key = str(child.InstanceDefinition.Id)
-                    if child_key not in wanted:
-                        wanted.add(child_key)
-                        pending.append(child_key)
-    else:
-        rows = [dict(id=o.Id, definition_id=str(o.InstanceDefinition.Id),
-                     occurrences=1, eligible=0 if instance_barrier(doc, o) else 1,
-                     parent_id=None) for o in top_level_instances(doc)]
-    records = {}
-    for row in rows:
-        key = row['definition_id']
-        if wanted is not None and key not in wanted:
-            continue
-        if key not in records:
-            definition = doc.InstanceDefinitions.FindId(Guid(key))
-            records[key] = dict(id=key, name=definition.Name, count=0, editable=0,
-                top_count=0, nested_count=0,
-                raw=definition.GetUserString(ASSIGNMENT_KEY))
-        records[key]['count'] += row['occurrences']
-        records[key]['nested_count' if row['parent_id'] else 'top_count'] += row['occurrences']
-        definition = doc.InstanceDefinitions.FindId(Guid(key))
-        if not definition.IsReference:
-            records[key]['editable'] += row['eligible']
-    return sorted(records.values(), key=lambda r: r['name'].casefold())
-
-
 def _restore_assignments(sender, event):
     doc = event.Document
     inverse = []
@@ -162,15 +95,13 @@ def save_assignments(doc, changes, expected=None):
     """Batch rules by definition ID -> layer ID (None removes); atomic with Undo.
 
     expected contains original raw rule strings to reject edits from a stale list.
-    No instances move. Protected-only definitions are read-only in the inventory.
+    No instances move. Local unused definitions can also receive rules.
     """
-    inventory = {r['id']: r for r in definition_inventory(doc, include_nested=True)
-                 if r['id'] in changes}
     planned = []
     for key, target_id in changes.items():
-        if key not in inventory or not inventory[key]['editable']:
-            raise ValueError('A block no longer has a visible, unlocked, editable instance. Refresh the list.')
         definition = doc.InstanceDefinitions.FindId(Guid(key))
+        if definition is None or definition.IsDeleted or not contents_are_local(definition):
+            raise ValueError('Choose an existing local block definition. Linked/reference definitions are skipped.')
         before = definition.GetUserString(ASSIGNMENT_KEY)
         if expected is not None and (key not in expected or before != expected[key]):
             raise ValueError('An assignment changed since the list opened. Reopen it before saving.')
@@ -294,7 +225,8 @@ def instance_graph(doc):
     return rows, nodes
 
 
-def plan_cleanup(doc, definition_ids=None, include_nested=True, excluded_definition_ids=()):
+def plan_cleanup(doc, definition_ids=None, include_nested=True, excluded_definition_ids=(),
+                 assignment_overrides=None):
     """Plan edits to references, skipping a shared edit if any occurrence is protected."""
     sc.escape_test(False, True)
     rows = []
@@ -317,8 +249,13 @@ def plan_cleanup(doc, definition_ids=None, include_nested=True, excluded_definit
             before=obj.Attributes.LayerIndex, target=None,
             source_path=doc.Layers[obj.Attributes.LayerIndex].FullPath)
         rows.append(row)
+        if not contents_are_local(obj.InstanceDefinition):
+            row['status'] = 'linked/reference block'
+            continue
         try:
-            assignment = read_assignment(obj.InstanceDefinition)
+            assignment = (assignment_overrides[reference['definition_id']]
+                          if assignment_overrides is not None and reference['definition_id'] in assignment_overrides
+                          else read_assignment(obj.InstanceDefinition))
         except ValueError:
             row['status'] = 'invalid assignment'
             continue
@@ -368,7 +305,7 @@ def cleanup(doc, definition_ids=None, expected=None, include_nested=True, exclud
     moves = [r for r in rows if r['status'] == 'move']
     if not moves:
         return rows
-    undo = doc.BeginUndoRecord('Clean up block layers')
+    undo = doc.BeginUndoRecord('Apply block home layers')
     redraw = doc.Views.RedrawEnabled
     changed = []
     try:
@@ -402,151 +339,3 @@ def cleanup(doc, definition_ids=None, expected=None, include_nested=True, exclud
             doc.EndUndoRecord(undo)
         doc.Views.Redraw()
     return rows
-
-
-def report(rows):
-    Rhino.RhinoApp.WriteLine('Block layer cleanup (local nested references included):')
-    grouped = {}
-    for row in rows:
-        key = (row['status'], row['block'], row.get('target_path', row.get('saved_path', '')))
-        grouped[key] = grouped.get(key, 0) + 1
-    counts = {}
-    for row in rows:
-        counts[row['status']] = counts.get(row['status'], 0) + 1
-    nested_moves = [r for r in rows if r['status'] == 'moved' and r['parent_id']]
-    if nested_moves:
-        Rhino.RhinoApp.WriteLine('  {0} nested reference edits affect {1} occurrences.'.format(
-            len(nested_moves), sum(r['occurrences'] for r in nested_moves)))
-    Rhino.RhinoApp.WriteLine('  ' + (', '.join('{0}: {1}'.format(k, v)
-        for k, v in sorted(counts.items())) if counts else 'No block instances found.'))
-    for (status, name, path), count in sorted(grouped.items()):
-        if status == 'already correct':
-            continue
-        Rhino.RhinoApp.WriteLine('  {0} | {1} ({2}){3}'.format(
-            status, name, count, ' -> ' + path if path else ''))
-    for row in rows:
-        if row['status'] == 'shared with protected copies':
-            Rhino.RhinoApp.WriteLine('  Shared skip: {0} inside {1}; {2} protected occurrences ({3}).'.format(
-                row['block'], row['parent_name'], sum(row['protection'].values()),
-                ', '.join(sorted(row['protection']))))
-    Rhino.RhinoApp.WriteLine('  Unassigned and unresolved blocks stay in place; missing layers require explicit review.')
-
-
-def missing_targets(doc, definition_ids=None, excluded_definition_ids=()):
-    """Group missing full paths once, only for references eligible for cleanup."""
-    groups = {}
-    for row in plan_cleanup(doc, definition_ids, excluded_definition_ids=excluded_definition_ids):
-        if row['status'] != 'missing target layer':
-            continue
-        path = row['saved_path']
-        key = path.casefold()
-        if key not in groups:
-            groups[key] = dict(key=key, path=path, definitions={}, references=0, occurrences=0)
-        group = groups[key]
-        definition = doc.InstanceDefinitions.FindId(Guid(row['definition_id']))
-        group['definitions'][row['definition_id']] = definition.GetUserString(ASSIGNMENT_KEY)
-        group['references'] += 1
-        group['occurrences'] += row['occurrences']
-    return sorted(groups.values(), key=lambda g: g['key'])
-
-
-def missing_signature(groups):
-    return [(g['key'], g['references'], g['occurrences'], tuple(sorted(g['definitions'].items())))
-            for g in sorted(groups, key=lambda g: g['key'])]
-
-
-def validate_layer_path(path):
-    parts = path.split('::')
-    if any(not p or p != p.strip() or not Rhino.DocObjects.ModelComponent.IsValidComponentName(p)
-           for p in parts):
-        raise ValueError('Cannot create the saved layer path "{0}". Choose an existing layer or skip.'.format(path))
-    return parts
-
-
-def _ensure_layer_path(doc, path, created):
-    parent = Guid.Empty
-    names = []
-    for name in validate_layer_path(path):
-        names.append(name)
-        full = '::'.join(names)
-        index = doc.Layers.FindByFullPath(full, -1)
-        if index < 0:
-            layer = Rhino.DocObjects.Layer()
-            layer.Name = name
-            layer.ParentLayerId = parent
-            index = doc.Layers.Add(layer)
-            if index < 0:
-                raise RuntimeError('Could not create layer ' + full)
-            created.append(doc.Layers[index].Id)
-        layer = doc.Layers[index]
-        if layer.IsReference:
-            raise ValueError('Cannot create or use a target inside a reference layer: ' + full)
-        parent = layer.Id
-    return doc.Layers[index]
-
-
-def resolve_missing_targets(doc, groups, choices):
-    """Apply reviewed mappings/creation atomically; skip decisions last this run.
-
-    choices: path key -> {'mode': 'skip'|'create'|'existing', 'target_id': ...}.
-    No instances move here. Returns created paths, changed rules and skipped IDs.
-    """
-    ids = {key for group in groups for key in group['definitions']}
-    if missing_signature(missing_targets(doc, ids)) != missing_signature(groups):
-        raise ValueError('Missing targets changed. Refresh the list before continuing.')
-    expected = {}
-    skipped = set()
-    for group in groups:
-        key = group['key']
-        choice = choices.get(key, dict(mode='skip'))
-        mode = choice.get('mode')
-        if mode == 'skip':
-            skipped.update(group['definitions'])
-        elif mode == 'create':
-            parts = validate_layer_path(group['path'])
-            for i in range(1, len(parts) + 1):
-                index = doc.Layers.FindByFullPath('::'.join(parts[:i]), -1)
-                if index >= 0 and doc.Layers[index].IsReference:
-                    raise ValueError('A target parent is a reference layer. Choose another layer.')
-        elif mode == 'existing':
-            try:
-                layer = doc.Layers.FindId(Guid(choice['target_id']))
-            except Exception:
-                raise ValueError('Choose an existing local layer.')
-            if layer is None or layer.IsDeleted or layer.IsReference:
-                raise ValueError('The chosen layer is no longer available. Choose another layer.')
-        else:
-            raise ValueError('Unknown missing-layer resolution.')
-        expected.update(group['definitions'])
-    created = []
-    changed = []
-    undo = doc.BeginUndoRecord('Resolve missing block layers')
-    try:
-        changes = {}
-        for group in sorted(groups, key=lambda g: (g['path'].count('::'), g['key'])):
-            choice = choices.get(group['key'], dict(mode='skip'))
-            if choice['mode'] == 'skip':
-                continue
-            if sc.escape_test(False):
-                raise RuntimeError('Layer resolution cancelled; changes rolled back.')
-            layer = (_ensure_layer_path(doc, group['path'], created) if choice['mode'] == 'create'
-                     else doc.Layers.FindId(Guid(choice['target_id'])))
-            changes.update({key: str(layer.Id) for key in group['definitions']})
-        changed = save_assignments(doc, changes, expected) if changes else []
-        return dict(created=[doc.Layers.FindId(i).FullPath for i in created], changed=changed,
-                    skipped=sorted(skipped))
-    except Exception:
-        failures = []
-        for key in changed:
-            if not doc.InstanceDefinitions.FindId(Guid(key)).SetUserString(ASSIGNMENT_KEY, expected[key]):
-                failures.append('assignment ' + key)
-        for layer_id in reversed(created):
-            layer = doc.Layers.FindId(layer_id)
-            if layer and not layer.IsDeleted and not doc.Layers.Delete(layer.Index, True):
-                failures.append('layer ' + layer.FullPath)
-        if failures:
-            Rhino.RhinoApp.WriteLine('Resolution rollback incomplete; use Undo: ' + ', '.join(failures))
-        raise
-    finally:
-        if undo:
-            doc.EndUndoRecord(undo)

@@ -1,0 +1,32 @@
+[
+  {
+    "suite": "test_layer_tools_live_rhino.py",
+    "passed": null,
+    "error": null,
+    "drawing_unchanged": true,
+    "log": "Isolated 1 layers including required parents. Run UnisolateLayer.py to restore.\nRestored layer visibility. New layers retain their current settings.\nKept 1 layers unlocked including required parents. Run RUTUnisolateLockLayer to restore.\nRestored layer locks. Visibility is unchanged.\nPASS: live preselection and all four isolation command entry points\n"
+  },
+  {
+    "suite": "test_block_dialogs_rhino.py",
+    "passed": 94,
+    "error": null,
+    "drawing_unchanged": true,
+    "log": "PASSED 94 visible dialog and Undo checks\n"
+  },
+  {
+    "suite": "test_pushpull_split_rhino.py",
+    "passed": 81,
+    "error": null,
+    "drawing_unchanged": true,
+    "seconds": 0.09,
+    "log": "PUSHPULL SPLIT/PROJECT: 81 checks passed\n"
+  },
+  {
+    "suite": "work/test_pushpull_mixed_rhino.py",
+    "passed": 140,
+    "error": null,
+    "drawing_unchanged": true,
+    "seconds": 0.09,
+    "log": "Push/pull complete.\nPush/pull complete.\nPUSHPULL MIXED: 140 checks passed; fixtures removed\n"
+  }
+]

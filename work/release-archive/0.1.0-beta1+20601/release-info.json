@@ -1,0 +1,50 @@
+{
+  "product": "Rhino Urbanism Toolkit",
+  "version": "0.1.0-beta1+20601",
+  "status": "Prepared for review; not authorized for sharing",
+  "platform": "Windows",
+  "minimum_rhino": "8.36",
+  "tested_rhino": "8.36.26296.17001",
+  "tested_windows_build": "26300.9974",
+  "package": "rhino-urbanism-toolkit-0.1.0-beta1+20601-rh8_36-win.yak",
+  "package_sha256": "454aaab4ba090254992f92b89442544c382353792b97f27d84784337cbffa737",
+  "source_archive": "RUT-0.1.0-beta1+20601-source.zip",
+  "source_sha256": "d25d6ac89632c8a84f6759c76d10eeac036354843ac0de650ce45d15f7eef5d3",
+  "commands": [
+    "RUTIsolateLayer",
+    "RUTUnisolateLayer",
+    "RUTIsolateLockLayer",
+    "RUTUnisolateLockLayer",
+    "RUTShowAllLayers",
+    "RUTUnlockAllLayers",
+    "RUTShowAndUnlockAllLayers",
+    "RUTToggleLayerExpansion",
+    "RUTCreateBlockVersion",
+    "RUTConsolidateBlockVersions",
+    "RUTRenameBlockFamily",
+    "RUTAssignBlockLayer",
+    "RUTApplyBlockLayers",
+    "RUTShowBlockLayers",
+    "RUTQuickFloorArea",
+    "RUTFloorArea",
+    "RUTPushPullCurve",
+    "RUTShapeBuilder"
+  ],
+  "toolbar": "One full-name tab; 18 commands; three category separators",
+  "known_release_decision": "Unresolved crash during automated floating-toolbar setup",
+  "source_snapshot": "Local working tree, not a published commit",
+  "validation": {
+    "build_content_checks": 113,
+    "packaging_tests": 5,
+    "automatic_discovery": true,
+    "registered_commands": 18,
+    "source_access_blocked": true,
+    "measurement_m2": {
+      "base": 80.0,
+      "section": 80.0
+    },
+    "hands_on": "Passed, reported by Rune; detailed per-item results not supplied"
+  },
+  "published": false,
+  "sharing_authorized": false
+}

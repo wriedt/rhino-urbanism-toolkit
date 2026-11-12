@@ -1,0 +1,50 @@
+[
+  {
+    "case": "crossing line: keep two external tails",
+    "regions": 2,
+    "leftover_pieces": 2,
+    "leftover_length": 10.0
+  },
+  {
+    "case": "unrelated selected line: keep whole",
+    "regions": 1,
+    "leftover_pieces": 1,
+    "leftover_length": 20.0
+  },
+  {
+    "case": "dangling line: no enclosed region edge, keep whole",
+    "regions": 1,
+    "leftover_pieces": 1,
+    "leftover_length": 10.0
+  },
+  {
+    "case": "line on outer boundary: no duplicate middle span",
+    "regions": 1,
+    "leftover_pieces": 2,
+    "leftover_length": 10.0
+  },
+  {
+    "case": "point tangency: preserve whole curve",
+    "regions": 1,
+    "leftover_pieces": 1,
+    "leftover_length": 14.142136
+  },
+  {
+    "case": "re-entering polyline through hatch: preserve outside bridge and both tails",
+    "regions": 3,
+    "leftover_pieces": 3,
+    "leftover_length": 26.0
+  },
+  {
+    "case": "curved leftovers stay exact arcs",
+    "regions": 2,
+    "leftover_pieces": 2,
+    "leftover_length": 20.943951
+  },
+  {
+    "case": "duplicate divider: both sources classified geometrically",
+    "regions": 2,
+    "leftover_pieces": 2,
+    "leftover_length": 10.0
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "display_name": "RUT | Rhino Urbanism Toolkit",
+  "presentation": "single_toolbar_with_separators",
+  "categories": [
+    {"name": "Layers", "commands": ["RUTIsolateLayer", "RUTUnisolateLayer", "RUTIsolateLockLayer", "RUTUnisolateLockLayer", "RUTShowAllLayers", "RUTUnlockAllLayers", "RUTShowAndUnlockAllLayers", "RUTToggleLayerExpansion"]},
+    {"name": "Blocks", "commands": ["RUTCreateBlockVersion", "RUTConsolidateBlockVersions", "RUTRenameBlockFamily", "RUTAssignBlockLayer", "RUTApplyBlockLayers", "RUTShowBlockLayers"]},
+    {"name": "Floor Area", "commands": ["RUTQuickFloorArea", "RUTFloorArea"]},
+    {"name": "Curve Tools", "commands": ["RUTPushPullCurve", "RUTShapeBuilder"]}
+  ]
+}

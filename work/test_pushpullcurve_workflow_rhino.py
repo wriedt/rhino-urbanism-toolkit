@@ -8,7 +8,8 @@ import System
 doc = __rhino_doc__
 original_context = sc.doc
 sc.doc = doc
-spec = importlib.util.spec_from_file_location('pp_workflow', r'C:\Projects\rhino-urbanism\PushPullCurve.py')
+spec = importlib.util.spec_from_file_location('pp_workflow',
+    os.path.join(os.path.dirname(os.path.dirname(__file__)), 'PushPullCurve.py'))
 pp = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(pp)
 # Optional one-time comparison; future workflow runs need no archived source.
@@ -74,6 +75,11 @@ class ScriptedPointInput:
         self.kind = None
     def AddOptionToggle(self, name, toggle):
         self.toggle = toggle
+        return 1
+    def AddOption(self, name):
+        return 2
+    def OptionIndex(self):
+        return 1  # Scripted Option events here toggle Extrude.
     def Get(self):
         self.kind, self.value = self.events.pop(0)
         if self.kind == 'Raise':

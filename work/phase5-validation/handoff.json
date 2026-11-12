@@ -1,0 +1,33 @@
+{
+  "version": "0.1.0-beta+19037",
+  "plugin": "C:\\Projects\\rhino-urbanism-toolkit\\work\\phase4-validation\\packages\\rhino-urbanism-toolkit\\0.1.0-beta+19037\\rhino-urbanism-toolkit.rhp",
+  "rhino": "8.36.26296.17001",
+  "drawing": "C:\\Projects\\rhino-urbanism-toolkit\\work\\phase5-validation\\RUT-beta-hands-on.3dm",
+  "commands": [
+    "RUTIsolateLayer",
+    "RUTUnisolateLayer",
+    "RUTIsolateLockLayer",
+    "RUTUnisolateLockLayer",
+    "RUTShowAllLayers",
+    "RUTUnlockAllLayers",
+    "RUTShowAndUnlockAllLayers",
+    "RUTToggleLayerExpansion",
+    "RUTCreateBlockVersion",
+    "RUTConsolidateBlockVersions",
+    "RUTRenameBlockFamily",
+    "RUTAssignBlockLayer",
+    "RUTApplyBlockLayers",
+    "RUTShowBlockLayers",
+    "RUTQuickFloorArea",
+    "RUTFloorArea",
+    "RUTPushPullCurve",
+    "RUTShapeBuilder"
+  ],
+  "aliases": [],
+  "geometry_unchanged": true,
+  "container_file": "C:\\Projects\\rhino-urbanism-toolkit\\work\\phase4-validation\\packages\\rhino-urbanism-toolkit\\0.1.0-beta+19037\\RUT.rhc",
+  "manual_acceptance": "Pending",
+  "prepared_package": "C:\\Projects\\rhino-urbanism-toolkit\\build\\rh8_36-win\\rhino-urbanism-toolkit-0.1.0-beta+19431-rh8_36-win.yak",
+  "setup_issue": "Confirmed Rhino crash during floating-toolbar window placement; cause unresolved. Native-container experiment excluded from the prepared Yak.",
+  "candidate_distinction": "Open session runs beta+19037; latest prepared package changes help and excludes RUT.rhc. Modeling runtime is unchanged."
+}

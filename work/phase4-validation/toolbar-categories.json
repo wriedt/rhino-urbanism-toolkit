@@ -1,0 +1,18 @@
+{
+  "rui": "C:\\Projects\\rhino-urbanism-toolkit\\work\\phase4-validation\\toolbar-preview\\RUT.rui",
+  "loaded_path": "C:\\Projects\\rhino-urbanism-toolkit\\work\\phase4-validation\\toolbar-preview\\RUT.rui",
+  "previous_files": [
+    {
+      "id": "35cf2b1c-6563-4b56-ac90-ffd13052c993",
+      "path": "C:\\Projects\\rhino-urbanism-toolkit\\work\\phase4-validation\\packages\\rhino-urbanism-toolkit\\0.1.0-beta+19934\\rhino-urbanism-toolkit.rui"
+    }
+  ],
+  "groups": [],
+  "categories": [
+    "Blocks",
+    "Layers",
+    "Curve Tools",
+    "Floor Area"
+  ],
+  "drawing_unchanged": true
+}

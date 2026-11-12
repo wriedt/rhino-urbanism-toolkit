@@ -1,0 +1,5 @@
+{
+  "version": "0.1.0-beta1",
+  "minimum_rhino": "8.36",
+  "platform": "Windows"
+}

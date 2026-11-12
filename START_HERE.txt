@@ -1,0 +1,15 @@
+RUT | Rhino Urbanism Toolkit
+For Rhino 8.36 or newer on Windows.
+
+INSTALL OR UPDATE
+Save your work and close all Rhino windows. Double-click Install-RUT.cmd,
+then reopen Rhino.
+
+TOOLBAR
+If it is missing, go to Window > Toolbars > File > Open and choose RUT.rui
+from this folder. Close any older RUT toolbar first.
+
+REMOVE
+Close Rhino and double-click Remove-RUT.cmd.
+
+If something is unclear or does not work, just ask the person who shared it.

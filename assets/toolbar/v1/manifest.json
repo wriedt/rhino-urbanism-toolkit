@@ -1,0 +1,164 @@
+[
+  {
+    "command": "RUTIsolateLayer",
+    "label": "Isolate layers",
+    "conditional": false,
+    "icons": {
+      "light": "light/RUTIsolateLayer.svg",
+      "dark": "dark/RUTIsolateLayer.svg"
+    }
+  },
+  {
+    "command": "RUTUnisolateLayer",
+    "label": "Restore visibility",
+    "conditional": false,
+    "icons": {
+      "light": "light/RUTUnisolateLayer.svg",
+      "dark": "dark/RUTUnisolateLayer.svg"
+    }
+  },
+  {
+    "command": "RUTIsolateLockLayer",
+    "label": "Isolate by locking",
+    "conditional": false,
+    "icons": {
+      "light": "light/RUTIsolateLockLayer.svg",
+      "dark": "dark/RUTIsolateLockLayer.svg"
+    }
+  },
+  {
+    "command": "RUTUnisolateLockLayer",
+    "label": "Restore layer locks",
+    "conditional": false,
+    "icons": {
+      "light": "light/RUTUnisolateLockLayer.svg",
+      "dark": "dark/RUTUnisolateLockLayer.svg"
+    }
+  },
+  {
+    "command": "RUTShowAllLayers",
+    "label": "Show all layers",
+    "conditional": false,
+    "icons": {
+      "light": "light/RUTShowAllLayers.svg",
+      "dark": "dark/RUTShowAllLayers.svg"
+    }
+  },
+  {
+    "command": "RUTUnlockAllLayers",
+    "label": "Unlock all layers",
+    "conditional": false,
+    "icons": {
+      "light": "light/RUTUnlockAllLayers.svg",
+      "dark": "dark/RUTUnlockAllLayers.svg"
+    }
+  },
+  {
+    "command": "RUTShowAndUnlockAllLayers",
+    "label": "Show and unlock",
+    "conditional": false,
+    "icons": {
+      "light": "light/RUTShowAndUnlockAllLayers.svg",
+      "dark": "dark/RUTShowAndUnlockAllLayers.svg"
+    }
+  },
+  {
+    "command": "RUTToggleLayerExpansion",
+    "label": "Expand / collapse",
+    "conditional": false,
+    "icons": {
+      "light": "light/RUTToggleLayerExpansion.svg",
+      "dark": "dark/RUTToggleLayerExpansion.svg"
+    }
+  },
+  {
+    "command": "RUTCreateBlockVersion",
+    "label": "Create block version",
+    "conditional": false,
+    "icons": {
+      "light": "light/RUTCreateBlockVersion.svg",
+      "dark": "dark/RUTCreateBlockVersion.svg"
+    }
+  },
+  {
+    "command": "RUTConsolidateBlockVersions",
+    "label": "Consolidate versions",
+    "conditional": false,
+    "icons": {
+      "light": "light/RUTConsolidateBlockVersions.svg",
+      "dark": "dark/RUTConsolidateBlockVersions.svg"
+    }
+  },
+  {
+    "command": "RUTRenameBlockFamily",
+    "label": "Rename block family",
+    "conditional": false,
+    "icons": {
+      "light": "light/RUTRenameBlockFamily.svg",
+      "dark": "dark/RUTRenameBlockFamily.svg"
+    }
+  },
+  {
+    "command": "RUTAssignBlockLayer",
+    "label": "Assign home layer",
+    "conditional": false,
+    "icons": {
+      "light": "light/RUTAssignBlockLayer.svg",
+      "dark": "dark/RUTAssignBlockLayer.svg"
+    }
+  },
+  {
+    "command": "RUTApplyBlockLayers",
+    "label": "Apply home layers",
+    "conditional": false,
+    "icons": {
+      "light": "light/RUTApplyBlockLayers.svg",
+      "dark": "dark/RUTApplyBlockLayers.svg"
+    }
+  },
+  {
+    "command": "RUTShowBlockLayers",
+    "label": "Review home layers",
+    "conditional": false,
+    "icons": {
+      "light": "light/RUTShowBlockLayers.svg",
+      "dark": "dark/RUTShowBlockLayers.svg"
+    }
+  },
+  {
+    "command": "RUTQuickFloorArea",
+    "label": "Quick floor area",
+    "conditional": false,
+    "icons": {
+      "light": "light/RUTQuickFloorArea.svg",
+      "dark": "dark/RUTQuickFloorArea.svg"
+    }
+  },
+  {
+    "command": "RUTFloorArea",
+    "label": "Floor area inspector",
+    "conditional": false,
+    "icons": {
+      "light": "light/RUTFloorArea.svg",
+      "dark": "dark/RUTFloorArea.svg"
+    }
+  },
+  {
+    "command": "RUTPushPullCurve",
+    "label": "Push / pull curve",
+    "conditional": true,
+    "icons": {
+      "light": "light/RUTPushPullCurve.svg",
+      "dark": "dark/RUTPushPullCurve.svg"
+    }
+  },
+  {
+    "command": "RUTShapeBuilder",
+    "label": "Shape builder",
+    "conditional": true,
+    "icons": {
+      "light": "light/RUTShapeBuilder.svg",
+      "dark": "dark/RUTShapeBuilder.svg"
+    }
+  }
+]

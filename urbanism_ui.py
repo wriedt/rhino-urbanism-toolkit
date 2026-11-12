@@ -70,7 +70,107 @@ def checkbox(text):
         # Eto's WPF access-label has a local foreground that overrides inheritance.
         native = control.ControlObject
         native.Content.Foreground = native.Foreground
+        _theme_windows_checkbox(control)
     return control
+
+
+def _theme_windows_checkbox(control):
+    """Aqua checkbox, retaining native mouse, keyboard and accessibility behavior."""
+    import clr
+    clr.AddReference('PresentationFramework')
+    from System.Windows.Markup import XamlReader
+    from System.Windows.Automation import AutomationProperties
+    field = '#263b43' if DARK else '#fcfefe'
+    line = '#49616b' if DARK else '#c6d8da'
+    accent = '#b1e4df' if DARK else '#246e7b'
+    tick = '#123d46' if DARK else '#f5ffff'
+    native = control.ControlObject
+    native.MinHeight = 22
+    native.FocusVisualStyle = None
+    AutomationProperties.SetName(native, control.Text)
+    template = '''<ControlTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="CheckBox">
+ <Grid x:Name="Root" Background="Transparent" MinHeight="22">
+  <Border x:Name="Box" Width="16" Height="16" CornerRadius="3" Background="FIELD"
+   BorderBrush="LINE" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="3,0,0,0">
+   <Grid>
+    <Path x:Name="Tick" Data="M 2 7 L 5 10 L 11 3" Stroke="TICK" StrokeThickness="1.8"
+     StrokeStartLineCap="Round" StrokeEndLineCap="Round" Visibility="Collapsed" />
+    <Border x:Name="Mixed" Height="2" Margin="3,0" Background="TICK" VerticalAlignment="Center" Visibility="Collapsed" />
+   </Grid>
+  </Border>
+  <ContentPresenter Margin="28,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"
+   RecognizesAccessKey="True" />
+ </Grid>
+ <ControlTemplate.Triggers>
+  <Trigger Property="IsChecked" Value="True">
+   <Setter TargetName="Box" Property="Background" Value="ACCENT" />
+   <Setter TargetName="Box" Property="BorderBrush" Value="ACCENT" />
+   <Setter TargetName="Tick" Property="Visibility" Value="Visible" />
+  </Trigger>
+  <Trigger Property="IsChecked" Value="{x:Null}">
+   <Setter TargetName="Box" Property="Background" Value="ACCENT" />
+   <Setter TargetName="Mixed" Property="Visibility" Value="Visible" />
+  </Trigger>
+  <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Box" Property="BorderBrush" Value="ACCENT" /></Trigger>
+  <Trigger Property="IsEnabled" Value="False"><Setter TargetName="Root" Property="Opacity" Value="0.45" /></Trigger>
+ </ControlTemplate.Triggers>
+</ControlTemplate>'''
+    for key, colour in [('FIELD', field), ('LINE', line), ('ACCENT', accent), ('TICK', tick)]:
+        template = template.replace(key, colour)
+    native.Template = XamlReader.Parse(template)
+
+
+def theme_slider(control):
+    """Aqua track and round thumb, retaining native slider input semantics."""
+    if not Rhino.Runtime.HostUtils.RunningOnWindows:
+        return
+    import clr
+    clr.AddReference('PresentationFramework')
+    from System.Windows.Markup import XamlReader
+    from System.Windows.Automation import AutomationProperties
+    accent = '#b1e4df' if DARK else '#246e7b'
+    track = '#49616b' if DARK else '#c6d8da'
+    field = '#263b43' if DARK else '#fcfefe'
+    native = control.ControlObject
+    native.FocusVisualStyle = None
+    native.IsMoveToPointEnabled = True
+    native.SmallChange = 1
+    native.LargeChange = 1
+    AutomationProperties.SetName(native, 'Decimal places')
+    native.Template = XamlReader.Parse('''
+<ControlTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="Slider">
+ <Grid Background="Transparent" Margin="2,0">
+  <Grid.RowDefinitions><RowDefinition Height="20" /><RowDefinition Height="4" /></Grid.RowDefinitions>
+  <Track x:Name="PART_Track" Orientation="Horizontal"
+   Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}"
+   Value="{TemplateBinding Value}">
+   <Track.DecreaseRepeatButton><RepeatButton Command="{x:Static Slider.DecreaseLarge}" Focusable="False">
+    <RepeatButton.Template><ControlTemplate><Border Height="4" CornerRadius="2" Background="''' + accent + '''" /></ControlTemplate></RepeatButton.Template>
+   </RepeatButton></Track.DecreaseRepeatButton>
+   <Track.Thumb><Thumb Width="16" Height="16">
+    <Thumb.Template><ControlTemplate TargetType="Thumb">
+     <Border x:Name="Grip" CornerRadius="8" Background="''' + accent + '''"
+      BorderBrush="''' + field + '''" BorderThickness="2" />
+     <ControlTemplate.Triggers>
+      <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Grip" Property="BorderThickness" Value="1" /></Trigger>
+      <Trigger Property="IsDragging" Value="True"><Setter TargetName="Grip" Property="BorderThickness" Value="1" /></Trigger>
+     </ControlTemplate.Triggers>
+    </ControlTemplate></Thumb.Template>
+   </Thumb></Track.Thumb>
+   <Track.IncreaseRepeatButton><RepeatButton Command="{x:Static Slider.IncreaseLarge}" Focusable="False">
+    <RepeatButton.Template><ControlTemplate><Border Height="4" CornerRadius="2" Background="''' + track + '''" /></ControlTemplate></RepeatButton.Template>
+   </RepeatButton></Track.IncreaseRepeatButton>
+  </Track>
+  <TickBar Grid.Row="1" Height="3" Placement="Bottom" Fill="''' + track + '''"
+   Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}"
+   TickFrequency="1" ReservedSpace="16" />
+ </Grid>
+ <ControlTemplate.Triggers>
+  <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="0.45" /></Trigger>
+ </ControlTemplate.Triggers>
+</ControlTemplate>''')
 
 
 def set_button_selected(control, selected):
@@ -78,7 +178,9 @@ def set_button_selected(control, selected):
     control.TextColor = ON_ACCENT if selected else INK
     if Rhino.Runtime.HostUtils.RunningOnWindows:
         from System.Windows.Automation import AutomationProperties
+        padding = control.ControlObject.Padding
         _round_windows_button(control, selected)
+        control.ControlObject.Padding = padding
         AutomationProperties.SetItemStatus(control.ControlObject, 'Selected' if selected else '')
 
 
@@ -156,10 +258,14 @@ def _round_windows_button(control, primary):
         int(border[1:3], 16), int(border[3:5], 16), int(border[5:7], 16)))
     hover = ('#c4eeea' if primary else '#304c54') if DARK else (
         '#1d616d' if primary else '#edf5f3')
+    # A same-colour stroke and fill create a dark antialiasing seam along
+    # WPF Border's inner corner. Filled buttons need only one painted shape.
+    thickness = '0' if primary else '1'
+    native.FocusVisualStyle = None
     native.Template = XamlReader.Parse('''
 <ControlTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="Button">
- <Border x:Name="Surface" CornerRadius="6" BorderThickness="1"
+ <Border x:Name="Surface" CornerRadius="6" BorderThickness="''' + thickness + '''"
   BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}"
   Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
   <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -171,9 +277,6 @@ def _round_windows_button(control, primary):
   </Trigger>
   <Trigger Property="IsPressed" Value="True">
    <Setter TargetName="Surface" Property="Opacity" Value="0.8" />
-  </Trigger>
-  <Trigger Property="IsKeyboardFocused" Value="True">
-   <Setter TargetName="Surface" Property="BorderThickness" Value="2" />
   </Trigger>
   <Trigger Property="IsEnabled" Value="False">
    <Setter TargetName="Surface" Property="Opacity" Value="0.45" />
@@ -211,10 +314,10 @@ class AquaSurface(forms.Drawable):
 
 class InfoPanel(forms.Panel if Rhino.Runtime.HostUtils.RunningOnWindows else forms.Drawable):
     """Rounded, opaque information surface matching the reference's fields."""
-    def __init__(self, content):
+    def __init__(self, content, padding=18):
         super().__init__()
         self.BackgroundColor = FIELD
-        self.Padding = drawing.Padding(18)
+        self.Padding = drawing.Padding(padding)
         self.Content = content
         if Rhino.Runtime.HostUtils.RunningOnWindows:
             from System.Windows import Thickness, CornerRadius
@@ -251,10 +354,9 @@ def content_layout(spacing=10):
     return layout
 
 
-class AquaDialog(forms.Dialog[bool]):
+class _AquaWindow:
     """Common header, content, actions and status; tied to the calling document."""
     def __init__(self, title, category, heading, description):
-        super().__init__()
         refresh_theme()
         self.Title = 'RUT | ' + title
         self.WindowStyle = forms.WindowStyle.NONE
@@ -269,7 +371,7 @@ class AquaDialog(forms.Dialog[bool]):
         self.body.Spacing = drawing.Size(12, 16)
         self.body.BackgroundColor = drawing.Colors.Transparent
         self.header = content_layout(0)
-        brand = label('RUT · ' + category.split('/')[-1].strip(), CAPTION_SIZE, True)
+        brand = label('RUT | ' + category.split('/')[-1].strip(), CAPTION_SIZE, True)
         brand.VerticalAlignment = forms.VerticalAlignment.Center
         self.close_button = button('×')
         self.close_button.Width = 30
@@ -286,7 +388,8 @@ class AquaDialog(forms.Dialog[bool]):
             self.header.ControlObject.MouseLeftButtonDown += self._drag_header
         self.body.AddRow(self.header)
         self.body.AddRow(divider())
-        self.body.AddRow(label(heading, TITLE_SIZE))
+        if heading:
+            self.body.AddRow(label(heading, TITLE_SIZE))
         if description:
             self.body.AddRow(label(description, BODY_SIZE, True))
         self.surface.Content = self.body
@@ -347,7 +450,7 @@ class AquaDialog(forms.Dialog[bool]):
 
     def _focus_default(self, sender, event):
         self._apply_window_region()
-        if self.DefaultButton is not None and self.DefaultButton.Enabled:
+        if getattr(self, 'DefaultButton', None) is not None and self.DefaultButton.Enabled:
             self.DefaultButton.Focus()
 
     def _drag_header(self, sender, event):
@@ -371,6 +474,34 @@ class AquaDialog(forms.Dialog[bool]):
         if picking:
             return Rhino.UI.EtoExtensions.ShowSemiModal[bool](self, doc, parent)
         return self.ShowModal(parent)
+
+class AquaDialog(forms.Dialog[bool]):
+    """Modal/semi-modal aqua window."""
+    def __init__(self, title, category, heading, description):
+        super().__init__()
+        _AquaWindow.__init__(self, title, category, heading, description)
+
+
+class AquaForm(forms.Form):
+    """Modeless aqua window using the same styling as command dialogs."""
+    def __init__(self, title, category, heading, description):
+        super().__init__()
+        _AquaWindow.__init__(self, title, category, heading, description)
+
+    def Close(self, result=False):
+        return super().Close()
+
+    def show_for_doc(self, doc, picking=False):
+        Rhino.UI.EtoExtensions.Show(self, doc)
+
+
+# Python.NET cannot mix Python and .NET base classes. Share the window methods
+# explicitly while retaining the native Eto dialog/form types.
+for _window_type in (AquaDialog, AquaForm):
+    for _method in ('_clip_window_corners', '_apply_window_region', '_focus_default',
+                    '_drag_header', 'finish', 'set_status'):
+        setattr(_window_type, _method, getattr(_AquaWindow, _method))
+AquaDialog.show_for_doc = _AquaWindow.show_for_doc
 
 
 def action_row(*controls):

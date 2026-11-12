@@ -1,0 +1,14 @@
+[
+  {
+    "output": "Save your drawings and close ALL Rhino windows, then run this helper again.\nPress any key to continue . . . ",
+    "open_Rhino_guard_passed": true,
+    "helper": "Install-RUT.cmd",
+    "exit_code": 3
+  },
+  {
+    "output": "Save your drawings and close ALL Rhino windows, then run this helper again.\nPress any key to continue . . . ",
+    "open_Rhino_guard_passed": true,
+    "helper": "Remove-RUT.cmd",
+    "exit_code": 3
+  }
+]

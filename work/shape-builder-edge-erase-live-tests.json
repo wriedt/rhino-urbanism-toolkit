@@ -1,0 +1,12 @@
+{
+  "passed": [
+    "real-viewport mouse callback selects outside edge without region",
+    "coral erase preview",
+    "Finish preserves hatch and opposite tail",
+    "source layer retained",
+    "document Undo/Redo",
+    "temporary fixtures removed",
+    "original geometry view and selection restored"
+  ],
+  "physical_alt_modifier": "not separately automated"
+}

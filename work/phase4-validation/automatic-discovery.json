@@ -1,0 +1,31 @@
+{
+  "explicit_plugin_load": false,
+  "rut_aliases": [],
+  "commands_before_dispatch": [
+    "RUTIsolateLayer",
+    "RUTUnisolateLayer",
+    "RUTIsolateLockLayer",
+    "RUTUnisolateLockLayer",
+    "RUTShowAllLayers",
+    "RUTUnlockAllLayers",
+    "RUTShowAndUnlockAllLayers",
+    "RUTToggleLayerExpansion",
+    "RUTCreateBlockVersion",
+    "RUTConsolidateBlockVersions",
+    "RUTRenameBlockFamily",
+    "RUTAssignBlockLayer",
+    "RUTApplyBlockLayers",
+    "RUTShowBlockLayers",
+    "RUTQuickFloorArea",
+    "RUTFloorArea",
+    "RUTPushPullCurve",
+    "RUTShapeBuilder"
+  ],
+  "dispatched": true,
+  "history": "",
+  "module_paths": {
+    "rut_runtime.rut_bootstrap": "C:\\Users\\rwr.ADEPT\\AppData\\Roaming\\McNeel\\Rhinoceros\\packages\\8.0\\rhino-urbanism-toolkit\\0.1.0-beta+19777\\libs\\2pN9RgAN\\rut_runtime\\rut_bootstrap.py",
+    "layer_tools": "C:\\Users\\rwr.ADEPT\\AppData\\Roaming\\McNeel\\Rhinoceros\\packages\\8.0\\rhino-urbanism-toolkit\\0.1.0-beta+19777\\libs\\2pN9RgAN\\rut_runtime\\layer_tools.py"
+  },
+  "success": true
+}

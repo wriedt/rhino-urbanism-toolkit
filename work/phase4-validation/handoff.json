@@ -1,0 +1,29 @@
+{
+  "version": "0.1.0-beta+20078",
+  "load": "(<LoadPlugInResult.Success: 0>, <System.Guid object at 0x0000029121ECE700>)",
+  "commands": [
+    "RUTIsolateLayer",
+    "RUTUnisolateLayer",
+    "RUTIsolateLockLayer",
+    "RUTUnisolateLockLayer",
+    "RUTShowAllLayers",
+    "RUTUnlockAllLayers",
+    "RUTShowAndUnlockAllLayers",
+    "RUTToggleLayerExpansion",
+    "RUTCreateBlockVersion",
+    "RUTConsolidateBlockVersions",
+    "RUTRenameBlockFamily",
+    "RUTAssignBlockLayer",
+    "RUTApplyBlockLayers",
+    "RUTShowBlockLayers",
+    "RUTQuickFloorArea",
+    "RUTFloorArea",
+    "RUTPushPullCurve",
+    "RUTShapeBuilder"
+  ],
+  "rut_aliases": [],
+  "toolbar": "C:\\Projects\\rhino-urbanism-toolkit\\work\\phase4-validation\\packages\\rhino-urbanism-toolkit\\0.1.0-beta+20078\\rhino-urbanism-toolkit.rui",
+  "active_objects": 0,
+  "test_drawing": "C:\\Projects\\rhino-urbanism-toolkit\\work\\phase4-validation\\RUT-beta-validation.3dm",
+  "document_name": "RUT-beta-validation.3dm"
+}

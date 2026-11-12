@@ -1,0 +1,26 @@
+{
+  "synthetic_only": true,
+  "cases": [
+    {
+      "input_lines": 22,
+      "regions": 100,
+      "prepare_seconds": 0.112,
+      "merge_seconds": 0.029,
+      "stroke_undo_seconds": 0.0
+    },
+    {
+      "input_lines": 42,
+      "regions": 400,
+      "prepare_seconds": 0.699,
+      "merge_seconds": 0.171,
+      "stroke_undo_seconds": 0.001
+    },
+    {
+      "input_lines": 62,
+      "regions": 900,
+      "prepare_seconds": 3.716,
+      "merge_seconds": 0.902,
+      "stroke_undo_seconds": 0.002
+    }
+  ]
+}

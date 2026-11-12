@@ -1,0 +1,7 @@
+[
+  "RUTFloorArea alias executes successfully",
+  "Floating alias opens live measurement",
+  "Repeated floating alias reuses existing window",
+  "Clipboard failure keeps floating window open with feedback",
+  "Alias-created window cleans up on close"
+]

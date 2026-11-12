@@ -1,26 +1,14 @@
-#Rune Wriedt, 2026-06-18
+# -*- coding: utf-8 -*-
+"""ShowAndUnlockAllLayers command. Shared implementation in layer_tools.py."""
+import importlib
+import scriptcontext as sc
+import layer_tools
+importlib.reload(layer_tools)
 
-import rhinoscriptsyntax as rs
 
-def show_and_unlock_all_layers():
-    
-    layers = rs.LayerNames()
+def main(doc=None):
+    return layer_tools.run_command(lambda: layer_tools.update_all(doc or sc.doc, visible=True, unlock=True))
 
-    rs.EnableRedraw(False)
-    
-    if not layers:
-        return
 
-    for name in layers:
-        try:
-            rs.LayerVisible(name, True)
-            
-            rs.LayerLocked(name, False)
-
-        except Exception as e:
-            print("Could not update layer '{}': {}".format(name, e))
-        
-        finally:
-            rs.EnableRedraw(True)
-
-show_and_unlock_all_layers()
+if __name__ == '__main__':
+    main()

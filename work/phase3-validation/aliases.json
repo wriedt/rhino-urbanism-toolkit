@@ -1,0 +1,19 @@
+{
+  "RUTIsolateLayer": "! _-ScriptEditor _Run \"C:\\Projects\\rhino-urbanism-toolkit\\IsolateLayer.py\"",
+  "RUTUnisolateLayer": "! _-ScriptEditor _Run \"C:\\Projects\\rhino-urbanism-toolkit\\UnisolateLayer.py\"",
+  "RUTIsolateLockLayer": "! _-ScriptEditor _Run \"C:\\Projects\\rhino-urbanism-toolkit\\IsolateLockLayer.py\"",
+  "RUTUnisolateLockLayer": "! _-ScriptEditor _Run \"C:\\Projects\\rhino-urbanism-toolkit\\UnisolateLockLayer.py\"",
+  "RUTShowAllLayers": "! _-ScriptEditor _Run \"C:\\Projects\\rhino-urbanism-toolkit\\ShowAllLayers.py\"",
+  "RUTUnlockAllLayers": "! _-ScriptEditor _Run \"C:\\Projects\\rhino-urbanism-toolkit\\UnlockAllLayers.py\"",
+  "RUTShowAndUnlockAllLayers": "! _-ScriptEditor _Run \"C:\\Projects\\rhino-urbanism-toolkit\\ShowAndUnlockAllLayers.py\"",
+  "RUTToggleLayerExpansion": "! _-ScriptEditor _Run \"C:\\Projects\\rhino-urbanism-toolkit\\ToggleLayerExpansion.py\"",
+  "RUTCreateBlockVersion": "! _-ScriptEditor _Run \"C:\\Projects\\rhino-urbanism-toolkit\\CreateBlockVersion.py\"",
+  "RUTConsolidateBlockVersions": "! _-ScriptEditor _Run \"C:\\Projects\\rhino-urbanism-toolkit\\ConsolidateBlockVersions.py\"",
+  "RUTRenameBlockFamily": "! _-ScriptEditor _Run \"C:\\Projects\\rhino-urbanism-toolkit\\RenameBlockFamily.py\"",
+  "RUTAssignBlockLayer": "! _-ScriptEditor _Run \"C:\\Projects\\rhino-urbanism-toolkit\\AssignBlockLayer.py\"",
+  "RUTApplyBlockLayers": "! _-ScriptEditor _Run \"C:\\Projects\\rhino-urbanism-toolkit\\ApplyBlockLayers.py\"",
+  "RUTShowBlockLayers": "! _-ScriptEditor _Run \"C:\\Projects\\rhino-urbanism-toolkit\\ShowBlockLayers.py\"",
+  "RUTQuickFloorArea": "! _-ScriptEditor _Run \"C:\\Projects\\rhino-urbanism-toolkit\\QuickFloorArea.py\"",
+  "RUTFloorArea": "! _-ScriptEditor _Run \"C:\\Projects\\rhino-urbanism-toolkit\\FloorArea.py\"",
+  "RutShapeBuilder": "! _-ScriptEditor _Run \"C:\\Projects\\rhino-urbanism-toolkit\\ShapeBuilder.py\""
+}

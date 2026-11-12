@@ -1,0 +1,20 @@
+{
+  "audit": {
+    "ticks": 240,
+    "selected": [],
+    "changes": []
+  },
+  "live_checks": [
+    "Enter finishes",
+    "Space finishes",
+    "Output Curves/Hatches option",
+    "KeepOriginals option",
+    "SelLast rejected",
+    "Ctrl+Z undoes stroke",
+    "empty stroke Undo cannot reach document",
+    "unrelated geometry cannot be selected",
+    "Escape cancels",
+    "drag-start layer B output",
+    "replacement Undo/Redo"
+  ]
+}

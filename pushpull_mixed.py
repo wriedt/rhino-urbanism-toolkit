@@ -79,6 +79,26 @@ class MixedCurveEdit(object):
                 return True
         return False
 
+    def split_selected_line(self, point, half):
+        """Stage exact line halves and select one, retaining curved neighbours."""
+        index = self.selected_index
+        if index is None or not self.linear[index] or half not in (0, 1):
+            return False
+        segment = self.segments[index]
+        line = Rhino.Geometry.Line(segment.PointAtStart, segment.PointAtEnd)
+        fraction = line.ClosestParameter(point)
+        if (fraction * line.Length <= self.tolerance or
+                (1 - fraction) * line.Length <= self.tolerance):
+            return False
+        split = line.PointAt(fraction)
+        self.segments[index:index + 1] = [Rhino.Geometry.LineCurve(line.From, split),
+            Rhino.Geometry.LineCurve(split, line.To)]
+        self.linear[index:index + 1] = [True, True]
+        segment.Dispose()
+        self.selected_index = index + half
+        self._critical = None
+        return True
+
     def line_points_2d(self):
         segment = self.segments[self.selected_index]
         return [self._uv(segment.PointAtStart), self._uv(segment.PointAtEnd)]

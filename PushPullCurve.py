@@ -26,6 +26,7 @@ SCRIPT_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 if SCRIPT_DIRECTORY not in sys.path:
     sys.path.insert(0, SCRIPT_DIRECTORY)
 import pushpull_mixed as mixed_curves
+import viewport_ui
 
 # ----------------------------------------------------------------------
 # Default settings
@@ -849,11 +850,11 @@ class PushPreview(object):
                 resources.extend([font, brush])
                 graphics.DrawString(value, font, brush, RectangleF(x, y, width, height))
 
-            text('RUT  /  Push/pull', 13, muted, 20, 15, 410, 22)
+            text('RUT | Push/pull', viewport_ui.CAPTION_PIXELS, muted, 20, 15, 410, 22)
             graphics.DrawLine(border, PointF(20, 43), PointF(430, 43))
             text('{:.3f} {}'.format(abs(result.get('signed_distance', 0)), self.unit_name),
-                 28, ink, 20, 51, 410, 40)
-            text(result['message'], 15, status_colour, 20, 98, 410, 43)
+                 viewport_ui.VALUE_PIXELS, ink, 20, 51, 410, 40)
+            text(result['message'], viewport_ui.BODY_PIXELS, status_colour, 20, 98, 410, 43)
             footer = 'Esc to cancel' if result['blocked'] else (
                 'Click or Enter to review deletion  /  Esc to cancel' if result.get('delete_curve') else
                 'Click to apply  /  Type a distance  /  Esc to cancel')
@@ -891,7 +892,7 @@ class PushPreview(object):
             display.DrawLine(plane_uv_to_point3d(result['original_midpoint'], self.plane),
                 plane_uv_to_point3d(result['moved_midpoint'], self.plane), COLOUR_GUIDE, 1)
         self._panel(result)
-        display.DrawBitmap(self.bitmap, 22, 22)
+        display.DrawBitmap(self.bitmap, viewport_ui.PANEL_LEFT, viewport_ui.PANEL_TOP)
 
 
 class TypedPreview(Rhino.Display.DisplayConduit):
@@ -929,6 +930,103 @@ def confirm_curve_deletion(doc):
 def option_toggle_to_bool(toggle):
     """Return the current bool value of a Rhino OptionToggle."""
     return bool(toggle.CurrentValue)
+
+
+def project_curve_to_plane(curve, plane, tolerance):
+    """Return an owned working copy without changing the source object."""
+    projected = Rhino.Geometry.Curve.ProjectToPlane(curve, plane)
+    if projected is not None:
+        if (projected.IsValid and projected.GetLength() > tolerance and
+                projected.IsInPlane(plane, tolerance)):
+            return projected
+        projected.Dispose()
+    return None
+
+
+def confirm_cplane_projection():
+    getter = Rhino.Input.Custom.GetOption()
+    try:
+        getter.SetCommandPrompt('Curve is non-planar. Project to the active CPlane?')
+        yes = getter.AddOption('Project')
+        getter.AddOption('Cancel')
+        return (getter.Get() == Rhino.Input.GetResult.Option and getter.OptionIndex() == yes)
+    finally:
+        getter.Dispose()
+
+
+def split_segment_points(points, closed, index, point, tolerance):
+    """Insert an interior vertex, preserving all existing selection boundaries."""
+    a, b = points[index], points[(index + 1) % len(points)]
+    direction = vec2_sub(b, a)
+    length = vec2_length(direction)
+    if length <= tolerance * 2:
+        return None
+    fraction = vec2_dot(vec2_sub(point, a), direction) / (length * length)
+    if fraction * length <= tolerance or (1 - fraction) * length <= tolerance:
+        return None
+    split = vec2_add(a, vec2_mul(direction, fraction))
+    return points[:index + 1] + [split] + points[index + 1:]
+
+
+def pick_segment_split(doc, points, closed, index, plane, mixed=None):
+    """Pick a split and hover/click a half, without document mutations."""
+    a = plane_uv_to_point3d(points[index], plane)
+    b = plane_uv_to_point3d(points[(index + 1) % len(points)], plane)
+    line = Rhino.Geometry.Line(a, b)
+    tolerance = doc.ModelAbsoluteTolerance
+
+    def draw_source(display):
+        if mixed is not None:
+            for segment in mixed.segments:
+                display.DrawCurve(segment, COLOUR_GUIDE, 1)
+        else:
+            draw_polyline_preview(display, polyline_2d_to_3d(points, plane, closed), COLOUR_GUIDE, 1)
+
+    split_picker = Rhino.Input.Custom.GetPoint()
+    def draw_split(sender, event):
+        draw_source(event.Display)
+        event.Display.DrawLine(a, b, COLOUR_SEGMENT, 5)
+    try:
+        split_picker.SetCommandPrompt('Pick split point inside the selected segment')
+        split_picker.Constrain(line)
+        split_picker.DynamicDraw += draw_split
+        while True:
+            split_picker.Get()
+            if split_picker.CommandResult() != Rhino.Commands.Result.Success:
+                return None
+            fraction = line.ClosestParameter(split_picker.Point())
+            if fraction * line.Length > tolerance and (1 - fraction) * line.Length > tolerance:
+                break
+            print('Pick a point away from the segment ends.')
+        split_point = line.PointAt(fraction)
+    finally:
+        split_picker.DynamicDraw -= draw_split
+        split_picker.Dispose()
+        doc.Views.Redraw()
+
+    chooser = Rhino.Input.Custom.GetPoint()
+    def half(point):
+        return 0 if line.ClosestParameter(point) < fraction else 1
+    def draw_choice(sender, event):
+        draw_source(event.Display)
+        event.Display.DrawLine(a, split_point, COLOUR_GUIDE, 2)
+        event.Display.DrawLine(split_point, b, COLOUR_GUIDE, 2)
+        first = half(event.CurrentPoint) == 0
+        event.Display.DrawLine(a if first else split_point,
+            split_point if first else b, COLOUR_SEGMENT, 6)
+        event.Display.DrawPoint(split_point, Rhino.Display.PointStyle.RoundActivePoint, 6, COLOUR_SEGMENT)
+    try:
+        chooser.SetCommandPrompt('Hover over a half and click to push/pull it')
+        chooser.Constrain(line)
+        chooser.DynamicDraw += draw_choice
+        chooser.Get()
+        if chooser.CommandResult() != Rhino.Commands.Result.Success:
+            return None
+        return split_point, half(chooser.Point())
+    finally:
+        chooser.DynamicDraw -= draw_choice
+        chooser.Dispose()
+        doc.Views.Redraw()
 
 
 def create_distance_picker(midpoint, plane):
@@ -990,6 +1088,7 @@ def pick_push_distance(doc, points_2d, is_closed, segment_index, plane,
     gp = create_distance_picker(original_midpoint_3d, plane)
     extrude_toggle = Rhino.Input.Custom.OptionToggle(extrude_mode, 'No', 'Yes')
     gp.AddOptionToggle('Extrude', extrude_toggle)
+    split_option = gp.AddOption('SplitSegment')
 
     # Mutable state also works in Rhino's IronPython runtime.
     state = {
@@ -1041,6 +1140,9 @@ def pick_push_distance(doc, points_2d, is_closed, segment_index, plane,
         while True:
             get_result = gp.Get()
             if get_result == Rhino.Input.GetResult.Option:
+                if gp.OptionIndex() == split_option:
+                    return Rhino.Commands.Result.Success, dict(
+                        split_requested=True, extrude=option_toggle_to_bool(extrude_toggle))
                 state['extrude'] = option_toggle_to_bool(extrude_toggle)
                 if state["forced_signed_distance"] is not None:
                     mixed_curves.dispose_result(typed_preview.result)
@@ -1216,6 +1318,7 @@ def main():
     go.AddOptionToggle("Extrude", extrude_toggle)
 
     mixed = None
+    working_curve = None
     result = None
     try:
         while True:
@@ -1229,11 +1332,16 @@ def main():
             curve = obj_ref.Curve()
             if curve is None:
                 return Rhino.Commands.Result.Failure
-            success, plane = curve.TryGetPlane()
+            success, plane = curve.TryGetPlane(sc.doc.ModelAbsoluteTolerance)
             if not success:
-                print('Select a planar curve.')
-                go.ClearObjects()
-                continue
+                if not confirm_cplane_projection():
+                    return Rhino.Commands.Result.Cancel
+                plane = sc.doc.Views.ActiveView.ActiveViewport.ConstructionPlane()
+                working_curve = project_curve_to_plane(curve, plane, sc.doc.ModelAbsoluteTolerance)
+                if working_curve is None:
+                    print('Projection did not produce a usable curve on the CPlane.')
+                    return Rhino.Commands.Result.Failure
+                curve = working_curve
             selection_point = obj_ref.SelectionPoint()
             if not selection_point.IsValid:
                 print('Could not read the curve selection point.')
@@ -1254,22 +1362,47 @@ def main():
                     print('Curved sections cannot be moved. Click a straight section.')
                     mixed.dispose()
                     mixed = None
+                    if working_curve is not None:
+                        working_curve.Dispose()
+                        working_curve = None
                     go.ClearObjects()
                     continue
                 points_2d = mixed.line_points_2d()
                 is_closed, segment_index = mixed.closed, 0
             break
         replace_original = option_toggle_to_bool(replace_toggle)
-        outcome, result = pick_push_distance(sc.doc,points_2d,is_closed,segment_index,plane,
-            option_toggle_to_bool(collapse_toggle),option_toggle_to_bool(preview_toggle),
-            option_toggle_to_bool(extrude_toggle),mixed=mixed)
-        if outcome != Rhino.Commands.Result.Success:
-            return outcome
+        extrude_mode = option_toggle_to_bool(extrude_toggle)
+        while True:
+            outcome, result = pick_push_distance(sc.doc,points_2d,is_closed,segment_index,plane,
+                option_toggle_to_bool(collapse_toggle),option_toggle_to_bool(preview_toggle),
+                extrude_mode,mixed=mixed)
+            if outcome != Rhino.Commands.Result.Success:
+                return outcome
+            if not result.get('split_requested'):
+                break
+            extrude_mode = result['extrude']
+            split = pick_segment_split(sc.doc,points_2d,is_closed,segment_index,plane,mixed)
+            if split is None:
+                return Rhino.Commands.Result.Cancel
+            split_point, half = split
+            if mixed is not None:
+                if not mixed.split_selected_line(split_point, half):
+                    return Rhino.Commands.Result.Failure
+                points_2d = mixed.line_points_2d()
+                segment_index = 0
+            else:
+                points_2d = split_segment_points(points_2d,is_closed,segment_index,
+                    point3d_to_plane_uv(split_point,plane),sc.doc.ModelAbsoluteTolerance)
+                if points_2d is None:
+                    return Rhino.Commands.Result.Failure
+                segment_index += half
         return apply_push_result(sc.doc,rhino_object,result,plane,is_closed,replace_original)
     finally:
         mixed_curves.dispose_result(result)
         if mixed is not None:
             mixed.dispose()
+        if working_curve is not None:
+            working_curve.Dispose()
         go.Dispose()
 
 

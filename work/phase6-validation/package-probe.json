@@ -1,0 +1,42 @@
+{
+  "explicit_plugin_load": false,
+  "clipboard_access": false,
+  "aliases": [],
+  "commands": [
+    "RUTApplyBlockLayers",
+    "RUTAssignBlockLayer",
+    "RUTConsolidateBlockVersions",
+    "RUTCreateBlockVersion",
+    "RUTFloorArea",
+    "RUTIsolateLayer",
+    "RUTIsolateLockLayer",
+    "RUTPushPullCurve",
+    "RUTQuickFloorArea",
+    "RUTRenameBlockFamily",
+    "RUTShapeBuilder",
+    "RUTShowAllLayers",
+    "RUTShowAndUnlockAllLayers",
+    "RUTShowBlockLayers",
+    "RUTToggleLayerExpansion",
+    "RUTUnisolateLayer",
+    "RUTUnisolateLockLayer",
+    "RUTUnlockAllLayers"
+  ],
+  "dispatch_history": "",
+  "assembly": "C:\\Users\\rwr.ADEPT\\AppData\\Roaming\\McNeel\\Rhinoceros\\packages\\8.0\\rhino-urbanism-toolkit\\0.1.0-beta1+20601\\rhino-urbanism-toolkit.rhp",
+  "version": "0.1.0-beta1+20601",
+  "source_access_blocked": true,
+  "floor_area_module": "C:\\Users\\rwr.ADEPT\\AppData\\Roaming\\McNeel\\Rhinoceros\\packages\\8.0\\rhino-urbanism-toolkit\\0.1.0-beta1+20601\\libs\\2pN9RgAN\\rut_runtime\\floor_area.py",
+  "measurement": {
+    "base": 80.0,
+    "section": 80.0
+  },
+  "fallback_toolbar": {
+    "path": "C:\\Users\\rwr.ADEPT\\AppData\\Roaming\\McNeel\\Rhinoceros\\packages\\8.0\\rhino-urbanism-toolkit\\0.1.0-beta1+20601\\RUT.rui",
+    "names": [
+      "RUT | Rhino Urbanism Toolkit"
+    ]
+  },
+  "drawing_unchanged": true,
+  "success": true
+}

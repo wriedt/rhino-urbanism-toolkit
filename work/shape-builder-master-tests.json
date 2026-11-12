@@ -1,0 +1,22 @@
+{
+  "passed": 17,
+  "checks": [
+    "direction 0: start layer wins",
+    "direction 0: start pattern wins",
+    "direction 0: output uses start layer",
+    "direction 0: output uses start scale",
+    "direction 0: output uses start rotation",
+    "direction 0: undo restores source styles",
+    "direction 1: start layer wins",
+    "direction 1: start pattern wins",
+    "direction 1: output uses start layer",
+    "direction 1: output uses start scale",
+    "direction 1: output uses start rotation",
+    "direction 1: undo restores source styles",
+    "first merge master is A",
+    "chained merge inherits existing master A",
+    "reverse chained merge adopts C",
+    "undo restores previous merged master A",
+    "erase and undo restore master A"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "process": 50932,
+  "rhino": "8.36.26296.17001",
+  "plugin_path": "C:\\Projects\\rhino-urbanism-toolkit\\work\\phase4-validation\\packages\\rhino-urbanism-toolkit\\0.1.0-beta+19379\\rhino-urbanism-toolkit.rhp",
+  "source_paths_before": [
+    "C:\\Projects\\rhino-urbanism-toolkit\\packaging"
+  ],
+  "source_access_blocked": true,
+  "load_result": "(<LoadPlugInResult.Success: 0>, <System.Guid object at 0x00000250FBD48540>)",
+  "rut_aliases": [],
+  "run_show_layers": true,
+  "modules": {
+    "rut_runtime.rut_bootstrap": "C:\\Users\\rwr.ADEPT\\.rhinocode\\libs\\2pN9RgAN\\rut_runtime\\rut_bootstrap.py",
+    "layer_tools": "C:\\Users\\rwr.ADEPT\\.rhinocode\\libs\\2pN9RgAN\\rut_runtime\\layer_tools.py"
+  },
+  "command_history": "[PackageManager] Removing inactive version: krill/0.13.0\n[PackageManager] Something went wrong cleaning up krill/0.13.0: Access to the path 'Krill.Core.dll' is denied.\nLoad Enscape.Rhino.Plugin ...\nEnscape.Rhino.Plugin started.\nCommand: _StartScriptServer\nScript server is ready\nLBT Plugin: C:\\Program Files\\ladybug_tools\\python\\Lib\\site-packages is added to IronPython search path!\n"
+}

@@ -1,0 +1,13 @@
+{
+  "passed": [
+    "curve-start produces a closed curve",
+    "hatch-start produces a hatch",
+    "both types finish in one session",
+    "master layers preserved",
+    "unrelated objects preserved",
+    "Undo restores four originals",
+    "Redo restores both output types",
+    "temporary fixtures removed",
+    "previous view and selection restored"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "kit_files": 7,
+  "verbose_docs_in_kit": 0,
+  "verbose_docs_or_tests_in_source_archive": 0,
+  "personal_status_notes_in_user_instructions": 0,
+  "runtime_files_unchanged_from_tested_candidate": 29,
+  "package_resources": [
+    "LICENSE",
+    "START_HERE.txt"
+  ]
+}

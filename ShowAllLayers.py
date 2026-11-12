@@ -1,25 +1,14 @@
-#Rune Wriedt, 2026-06-18
-
-import rhinoscriptsyntax as rs
-
-def show_all_layers():
-    
-    layers = rs.LayerNames()
-
-    rs.EnableRedraw(False)
-
-    if not layers:
-        return
-
-    for name in layers:
-        try:
-            rs.LayerVisible(name, True)
-
-        except Exception as e:
-            print("Could not show layer '{}': {}".format(name, e))
-
-        finally:
-            rs.EnableRedraw(True)
+# -*- coding: utf-8 -*-
+"""ShowAllLayers command. Shared implementation in layer_tools.py."""
+import importlib
+import scriptcontext as sc
+import layer_tools
+importlib.reload(layer_tools)
 
 
-show_all_layers()
+def main(doc=None):
+    return layer_tools.run_command(lambda: layer_tools.update_all(doc or sc.doc, visible=True))
+
+
+if __name__ == '__main__':
+    main()
